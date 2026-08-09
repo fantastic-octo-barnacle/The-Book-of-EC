@@ -1,0 +1,11 @@
+# --- OS -----------
+.DS_Store
+*:Zone.Identifier
+Thumb.db
+
+# --- JS -----------
+node_modules/
+
+.vitepress/dist
+.vitepress/cache
+
