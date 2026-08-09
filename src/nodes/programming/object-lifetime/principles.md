@@ -1,0 +1,8 @@
+---
+node: programming.object-lifetime
+role: theory
+---
+
+# 原理
+
+对象离开生命周期后，其地址可以仍然存在，但不再可解引用。未定义行为不代表“随机实现”，而是语言不再保证结果。

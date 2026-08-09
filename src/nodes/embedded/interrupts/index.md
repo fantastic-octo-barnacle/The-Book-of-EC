@@ -1,0 +1,25 @@
+---
+{
+  "id": "embedded.interrupts",
+  "title": "中断与事件响应",
+  "summary": "中断优先级、延迟与中断上下文约束。",
+  "level": "core",
+  "estimatedTime": "2h",
+  "concepts": ["interrupt", "latency", "priority", "shared-state"],
+  "technologies": ["Cortex-M", "MCU"],
+  "relations": [{ "target": "embedded.clock-reset", "type": "required" }, { "target": "programming.object-lifetime", "type": "recommended" }],
+  "parts": []
+}
+---
+
+# 中断与事件响应
+
+## 要点
+
+- 中断延迟由屏蔽、优先级、嵌套和当前执行状态共同决定。
+- 中断处理应短且无阻塞；耗时工作转交给主循环或任务。
+- 中断共享的数据需要明确原子性和同步方式。
+
+## 检查题
+
+中断处理函数为何不应等待外设完成？优先级数值与优先级高低为何需查具体平台？

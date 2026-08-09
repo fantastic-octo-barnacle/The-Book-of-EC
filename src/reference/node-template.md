@@ -2,43 +2,66 @@
 title: 知识节点模板
 ---
 
-# 知识节点模板
+# 学习节点模板
 
-新增页面应使用这份结构；重点在于把读者带向资料和验证，而非在站内写成一章教材。
+学习节点是依赖图的最小单位。节点目录中的 `index.md` 定义元数据；正文可拆为附属页面。
 
 ```md
 ---
-title: 节点名称
-level: 入门 | 核心 | 进阶 | 综合
-prerequisites: [/先修页面]
-next: [/后续页面]
-tags: [主题, 平台]
-estimated_time: 2h
+{
+  "id": "programming.example",
+  "title": "节点名称",
+  "summary": "一句话说明该节点解决的问题。",
+  "level": "intro | core | advanced | integration",
+  "estimatedTime": "2h",
+  "concepts": ["object", "lifetime"],
+  "technologies": ["C"],
+  "relations": [
+    { "target": "other.node", "type": "required" },
+    { "target": "other.optional-node", "type": "recommended" }
+  ],
+  "parts": [{ "title": "实验", "path": "practice", "type": "practice" }]
+}
 ---
 
 # 节点名称
 
-<p class="node-meta">难度 · 先修 · 下一步</p>
+<p class="node-meta">层级 · 时间 · 概念 · 技术</p>
 
-## 为什么需要它
-说明项目中的具体价值和边界。
+## 用途
+说明工程中的具体作用和范围。
 
-## 最小原理模型
-列出 3–5 个必须能解释的关系。
+## 要点
+列出 3–5 个必须解释清楚的关系。
 
-## 学习方向
-说明本站不展开的内容、推荐资料类型与中英文检索词。
+## 附属页
+- [实验](./practice)
 
-## 理解检查
-给出 3–5 个需要解释因果的问题。
+## 延伸
+列出本站不展开的内容、资料类型与中英文检索词。
 
-## 微型实验
-给出低风险、可观察、有完成标准的实验。
+## 检查题
+给出 3–5 个因果问题。
+
+## 实验
+给出低风险、可观察且有完成标准的实验。
+```
+
+附属页示例：
+
+```md
+---
+node: programming.example
+role: practice
+---
+
+# 实验
 ```
 
 ## 编写检查
 
-- 链接的先修和下一步是否真的存在，且形成合理依赖？
+- `id` 是否全局唯一，`concepts` 和 `technologies` 是否来自受控词表？
+- `relations` 的目标是否存在；必需依赖是否无环？
+- 依赖是否指向学习节点，而非专题、标签或页面小节？
 - 自测题是否检验理解，而非术语背诵？
 - 实验是否包含安全边界和可观察的完成标准？
-- 外部资料是否兼顾中文入门与英文/官方深入？

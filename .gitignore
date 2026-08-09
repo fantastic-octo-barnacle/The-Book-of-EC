@@ -6,6 +6,5 @@ Thumb.db
 # --- JS -----------
 node_modules/
 
-.vitepress/dist
-.vitepress/cache
-
+src/.vitepress/dist
+src/.vitepress/cache

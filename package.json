@@ -1,10 +1,15 @@
 {
   "devDependencies": {
+    "playwright": "1.55.0",
     "vitepress": "2.0.0-alpha.19"
   },
   "scripts": {
-    "dev": "vitepress dev",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
+    "dev": "vitepress dev src",
+    "build": "vitepress build src",
+    "preview": "vitepress preview src"
+  },
+  "dependencies": {
+    "cytoscape": "^3.34.0",
+    "cytoscape-dagre": "^4.0.0"
   }
 }
