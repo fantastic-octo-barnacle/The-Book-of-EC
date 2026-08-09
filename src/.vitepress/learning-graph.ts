@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import type { Plugin } from 'vite'
-import { concepts, levels, technologies } from './knowledge-taxonomy'
+import { concepts, levels, technologies } from './knowledge-taxonomy.ts'
 
 const knownLevels = new Set<string>(levels)
 const knownConcepts = new Set<string>(concepts)

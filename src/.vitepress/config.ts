@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vitepress'
-import { learningGraphPlugin } from './learning-graph'
+import { learningGraphPlugin } from './learning-graph.ts'
 
 const source = fileURLToPath(new URL('..', import.meta.url))
 
