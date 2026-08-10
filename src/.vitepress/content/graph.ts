@@ -10,20 +10,16 @@ function nodeDirectory(source: string, id: NodeId) {
   return join(source, "nodes", ...id.split("."))
 }
 
-/** 校验节点文件、附属页、必需依赖和专题成员。 */
+/** 校验节点页面、必需依赖和专题成员。 */
 export function validateContent(source: string) {
   for (const [id, node] of Object.entries(nodes) as [NodeId, (typeof nodes)[NodeId]][]) {
     const directory = nodeDirectory(source, id)
-    if (!existsSync(join(directory, "index.md"))) {
-      throw new Error(`学习节点缺少入口页：${id}`)
-    }
-
     const paths = new Set<string>()
     for (const part of node.parts) {
-      if (paths.has(part.path)) throw new Error(`学习节点包含重复附属页：${id}/${part.path}`)
+      if (paths.has(part.path)) throw new Error(`学习节点包含重复页面：${id}/${part.path}`)
       paths.add(part.path)
-      if (!existsSync(join(directory, `${part.path}.md`))) {
-        throw new Error(`学习节点附属页不存在：${id}/${part.path}`)
+      if (!existsSync(join(directory, part.path))) {
+        throw new Error(`学习节点页面不存在：${id}/${part.path}`)
       }
     }
   }

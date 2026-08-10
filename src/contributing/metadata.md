@@ -19,7 +19,7 @@ next: false
 - `estimatedTime`：完成节点的大致时间。
 - `concepts`、`technologies`：图内筛选使用的固定标签。
 - `relations`：指向必需或建议先修节点。
-- `parts`：节点内部页面的标题、路径与线性顺序。
+- `parts`：节点全部页面的标题、Markdown 文件路径与线性顺序；首项为入口页，路径包含 `.md` 扩展名。
 
 ## 专题成员
 
@@ -27,4 +27,4 @@ next: false
 
 ## 构建验证
 
-TypeScript 负责检查 ID、标签和字段取值；构建阶段继续检查 Markdown 文件存在性、重复页面、重复专题成员和必需依赖环。
+TypeScript 负责检查 ID、标签、字段取值和 Markdown 路径扩展名；构建阶段继续检查已登记页面是否存在、重复页面、重复专题成员和必需依赖环。

@@ -23,6 +23,13 @@ declare module "virtual:learning-graph" {
         /** 关系的强制程度。 */
         type: "required" | "recommended"
       }>
+      /** 全部页面；首项为节点入口。 */
+      parts: Array<{
+        /** 页面在侧边栏中的标题。 */
+        title: string
+        /** 相对节点目录的 Markdown 文件路径。 */
+        path: `${string}.md`
+      }>
       /** 节点入口页路由。 */
       route: string
     }>

@@ -31,7 +31,7 @@ pnpm dev
 3. 运行 `pnpm fmt`，检查格式化结果。
 4. 运行 `pnpm check` 和 `pnpm build`。
 
-新增学习节点时，在 `src/nodes/<domain>/<slug>/index.md` 创建入口页，并在 `src/.vitepress/content/nodes.ts` 注册。附属页还需加入节点的 `parts`；加入专题则更新 `topics.ts`。完整规则见[维护本书](src/contributing/index.md)。
+新增学习节点时，在 `src/nodes/<domain>/<slug>/` 创建 Markdown 页面，并在 `src/.vitepress/content/nodes.ts` 注册。`parts` 必须按阅读顺序列出全部页面，首项为入口页；加入专题则更新 `topics.ts`。完整规则见[维护本书](src/contributing/index.md)。
 
 ## 架构
 
@@ -48,6 +48,6 @@ src/
     └── config.ts          VitePress 配置
 ```
 
-`nodes.ts` 是学习节点的注册表，也是节点 ID 和关系类型的类型来源。构建插件会检查页面是否存在、附属页和专题成员是否重复，以及必需先修关系是否成环。导航由注册表和专题数据生成，正文与元数据必须保持一致。
+`nodes.ts` 是学习节点的注册表，也是节点 ID 和关系类型的类型来源。构建插件会检查已登记页面是否存在、页面和专题成员是否重复，以及必需先修关系是否成环。导航由注册表和专题数据生成，正文与元数据必须保持一致。
 
 更具体的开发和写作约束见 [AGENTS.md](AGENTS.md)。

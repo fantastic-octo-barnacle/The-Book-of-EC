@@ -3,16 +3,15 @@ import type { Concept, Level, Technology } from "./taxonomy.ts"
 /** 先修关系的强制程度。 */
 export type RelationType = "required" | "recommended"
 
-/** 节点附属页的导航信息。 */
+/** 节点 Markdown 文件的相对路径。 */
+type MarkdownPath = `${string}.md`
+
+/** 节点页面的导航信息。 */
 type NodePart = {
-  /** 附属页在侧边栏中的标题。 */
+  /** 页面在侧边栏中的标题。 */
   title: string
-  /**
-   * 相对节点目录的无扩展名路径。
-   * - 充当网站页面路由的一部分。
-   * - 对应节点目录下的 Markdown 文件名。
-   */
-  path: string
+  /** 相对节点目录的 Markdown 文件路径。 */
+  path: MarkdownPath
 }
 
 /** 节点注册项的公共结构。 */
@@ -36,8 +35,8 @@ type NodeShape<Id extends string> = {
     /** 关系的强制程度。 */
     type: RelationType
   }[]
-  /** 除入口页外的附属页。 */
-  parts: readonly NodePart[]
+  /** 全部页面；首项为节点入口。 */
+  parts: readonly [NodePart, ...NodePart[]]
 }
 
 /** 保留节点键的字面量类型，并限制关系只能指向注册节点。 */
@@ -57,9 +56,10 @@ export const nodes = defineNodes({
     technologies: ["Windows", "Linux", "PowerShell", "shell"],
     relations: [],
     parts: [
-      { title: "命令、参数与工具探查", path: "commands" },
-      { title: "目录、路径与文件操作", path: "filesystem" },
-      { title: "环境变量、PATH 与命令运行", path: "environment" }
+      { title: "命令行基础", path: "index.md" },
+      { title: "命令、参数与工具探查", path: "commands.md" },
+      { title: "目录、路径与文件操作", path: "filesystem.md" },
+      { title: "环境变量、PATH 与命令运行", path: "environment.md" }
     ]
   },
   "engineering.git-model": {
@@ -70,7 +70,10 @@ export const nodes = defineNodes({
     concepts: ["version-control"],
     technologies: ["Git"],
     relations: [{ target: "engineering.shell-basics", type: "recommended" }],
-    parts: [{ title: "练习", path: "practice" }]
+    parts: [
+      { title: "Git 状态模型", path: "index.md" },
+      { title: "练习", path: "practice.md" }
+    ]
   },
   "engineering.debugging": {
     title: "调试与测量",
@@ -80,7 +83,7 @@ export const nodes = defineNodes({
     concepts: ["debugging", "latency"],
     technologies: ["MCU"],
     relations: [{ target: "programming.object-lifetime", type: "recommended" }],
-    parts: []
+    parts: [{ title: "调试与测量", path: "index.md" }]
   },
   "programming.translation-linking": {
     title: "翻译与链接",
@@ -90,7 +93,7 @@ export const nodes = defineNodes({
     concepts: ["compilation", "linking"],
     technologies: ["C", "C++"],
     relations: [{ target: "engineering.shell-basics", type: "required" }],
-    parts: []
+    parts: [{ title: "翻译与链接", path: "index.md" }]
   },
   "programming.object-lifetime": {
     title: "对象与生命周期",
@@ -101,8 +104,9 @@ export const nodes = defineNodes({
     technologies: ["C", "C++"],
     relations: [{ target: "programming.translation-linking", type: "required" }],
     parts: [
-      { title: "原理", path: "principles" },
-      { title: "练习", path: "practice" }
+      { title: "对象与生命周期", path: "index.md" },
+      { title: "原理", path: "principles.md" },
+      { title: "练习", path: "practice.md" }
     ]
   },
   "programming.pointers-arrays": {
@@ -113,7 +117,7 @@ export const nodes = defineNodes({
     concepts: ["pointer", "array", "memory"],
     technologies: ["C"],
     relations: [{ target: "programming.object-lifetime", type: "required" }],
-    parts: []
+    parts: [{ title: "指针与数组", path: "index.md" }]
   },
   "programming.cpp-resource": {
     title: "C++ 资源管理",
@@ -123,7 +127,7 @@ export const nodes = defineNodes({
     concepts: ["ownership", "lifetime"],
     technologies: ["C++"],
     relations: [{ target: "programming.object-lifetime", type: "required" }],
-    parts: []
+    parts: [{ title: "C++ 资源管理", path: "index.md" }]
   },
   "embedded.circuit-basics": {
     title: "电路与电平基础",
@@ -133,7 +137,7 @@ export const nodes = defineNodes({
     concepts: ["power", "logic-level"],
     technologies: ["MCU"],
     relations: [],
-    parts: []
+    parts: [{ title: "电路与电平基础", path: "index.md" }]
   },
   "embedded.clock-reset": {
     title: "时钟、复位与启动",
@@ -146,7 +150,7 @@ export const nodes = defineNodes({
       { target: "embedded.circuit-basics", type: "required" },
       { target: "programming.translation-linking", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "时钟、复位与启动", path: "index.md" }]
   },
   "embedded.gpio": {
     title: "GPIO 与引脚复用",
@@ -156,7 +160,7 @@ export const nodes = defineNodes({
     concepts: ["GPIO", "pinmux", "logic-level"],
     technologies: ["STM32", "MCU"],
     relations: [{ target: "embedded.clock-reset", type: "required" }],
-    parts: []
+    parts: [{ title: "GPIO 与引脚复用", path: "index.md" }]
   },
   "embedded.interrupts": {
     title: "中断与事件响应",
@@ -169,7 +173,7 @@ export const nodes = defineNodes({
       { target: "embedded.clock-reset", type: "required" },
       { target: "programming.object-lifetime", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "中断与事件响应", path: "index.md" }]
   },
   "embedded.timers-dma": {
     title: "定时器、PWM 与 DMA",
@@ -182,7 +186,7 @@ export const nodes = defineNodes({
       { target: "embedded.clock-reset", type: "required" },
       { target: "embedded.interrupts", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "定时器、PWM 与 DMA", path: "index.md" }]
   },
   "embedded.drivers": {
     title: "外设驱动边界",
@@ -195,7 +199,7 @@ export const nodes = defineNodes({
       { target: "embedded.gpio", type: "required" },
       { target: "embedded.interrupts", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "外设驱动边界", path: "index.md" }]
   },
   "embedded.rtos": {
     title: "RTOS 并发基础",
@@ -208,7 +212,7 @@ export const nodes = defineNodes({
       { target: "embedded.interrupts", type: "required" },
       { target: "programming.object-lifetime", type: "required" }
     ],
-    parts: []
+    parts: [{ title: "RTOS 并发基础", path: "index.md" }]
   },
   "communication.serial-buses": {
     title: "串行总线",
@@ -221,7 +225,7 @@ export const nodes = defineNodes({
       { target: "embedded.gpio", type: "required" },
       { target: "embedded.drivers", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "串行总线", path: "index.md" }]
   },
   "communication.protocol-framing": {
     title: "帧与协议解析",
@@ -234,7 +238,7 @@ export const nodes = defineNodes({
       { target: "communication.serial-buses", type: "required" },
       { target: "programming.pointers-arrays", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "帧与协议解析", path: "index.md" }]
   },
   "control.sampling-model": {
     title: "采样与系统模型",
@@ -244,7 +248,7 @@ export const nodes = defineNodes({
     concepts: ["sampling", "feedback"],
     technologies: ["IMU", "motor"],
     relations: [{ target: "embedded.circuit-basics", type: "recommended" }],
-    parts: []
+    parts: [{ title: "采样与系统模型", path: "index.md" }]
   },
   "control.feedback": {
     title: "反馈与稳定性",
@@ -254,7 +258,10 @@ export const nodes = defineNodes({
     concepts: ["feedback", "sampling", "saturation"],
     technologies: ["motor"],
     relations: [{ target: "control.sampling-model", type: "required" }],
-    parts: [{ title: "实验", path: "practice" }]
+    parts: [
+      { title: "反馈与稳定性", path: "index.md" },
+      { title: "实验", path: "practice.md" }
+    ]
   },
   "control.pid": {
     title: "离散 PID 与饱和",
@@ -264,7 +271,7 @@ export const nodes = defineNodes({
     concepts: ["PID", "feedback", "saturation", "sampling"],
     technologies: ["motor"],
     relations: [{ target: "control.feedback", type: "required" }],
-    parts: []
+    parts: [{ title: "离散 PID 与饱和", path: "index.md" }]
   },
   "control.estimation-actuation": {
     title: "估计与执行器约束",
@@ -277,7 +284,7 @@ export const nodes = defineNodes({
       { target: "control.pid", type: "required" },
       { target: "embedded.timers-dma", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "估计与执行器约束", path: "index.md" }]
   },
   "robotics.bring-up": {
     title: "板级上电与启动",
@@ -291,7 +298,7 @@ export const nodes = defineNodes({
       { target: "embedded.clock-reset", type: "required" },
       { target: "engineering.debugging", type: "required" }
     ],
-    parts: []
+    parts: [{ title: "板级上电与启动", path: "index.md" }]
   },
   "robotics.system-integration": {
     title: "系统联调",
@@ -306,7 +313,7 @@ export const nodes = defineNodes({
       { target: "control.pid", type: "required" },
       { target: "robotics.bring-up", type: "recommended" }
     ],
-    parts: []
+    parts: [{ title: "系统联调", path: "index.md" }]
   }
 })
 
@@ -324,14 +331,21 @@ export type GraphNode = NodeDefinition & {
   route: string
 }
 
-/** 将点分隔的节点 ID 转换为目录式路由。 */
+/** 将点分隔的节点 ID 转换为节点目录路由。 */
 export function nodeRoute(id: NodeId) {
   return `/nodes/${id.replaceAll(".", "/")}/`
+}
+
+/** 将节点内的 Markdown 路径转换为页面路由。 */
+export function nodePartRoute(id: NodeId, path: MarkdownPath) {
+  const page = path.slice(0, -".md".length)
+  const routePath = page === "index" ? "" : page.replace(/\/index$/, "/")
+  return `${nodeRoute(id)}${routePath}`
 }
 
 /** 生成按中文标题排序的前端节点列表。 */
 export function graphNodes(): GraphNode[] {
   return (Object.entries(nodes) as [NodeId, NodeDefinition][])
-    .map(([id, node]) => ({ ...node, id, route: nodeRoute(id) }))
+    .map(([id, node]) => ({ ...node, id, route: nodePartRoute(id, node.parts[0].path) }))
     .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"))
 }
