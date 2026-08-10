@@ -40,7 +40,7 @@ try {
 
   await page.goto(`${baseURL}/map/topics/embedded`)
   assert.equal(await page.getByRole("heading", { name: "电子与嵌入式" }).isVisible(), true)
-  assert.equal(await page.getByRole("link", { name: "总图", exact: true }).isVisible(), true)
+  assert.equal(await page.getByRole("link", { name: "总览", exact: true }).isVisible(), true)
   assert.equal(await page.getByText("专题", { exact: true }).first().isVisible(), true)
   assert.equal(await page.locator(".learning-graph .cy-canvas canvas").first().isVisible(), true)
 

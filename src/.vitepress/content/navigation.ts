@@ -8,7 +8,7 @@ export function createSidebar(): DefaultTheme.Sidebar {
       {
         text: "学习图",
         items: [
-          { text: "总图", link: "/map/" },
+          { text: "总览", link: "/map/" },
           {
             text: "专题",
             collapsed: false,
