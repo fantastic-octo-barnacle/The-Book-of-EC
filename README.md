@@ -1,0 +1,53 @@
+# The Book of EC
+
+面向 RoboMaster 新成员的嵌入式电控学习导航。项目用学习节点及其先修关系组织工程、编程、嵌入式、通信、控制和机器人实践知识。
+
+## 本地开发
+
+需要 Node.js 和 pnpm。安装依赖并启动开发服务器：
+
+```sh
+pnpm install
+pnpm dev
+```
+
+常用指令：
+
+| 指令             | 用途                          |
+| ---------------- | ----------------------------- |
+| `pnpm dev`       | 启动 VitePress 开发服务器     |
+| `pnpm fmt`       | 格式化代码和文档              |
+| `pnpm fmt:check` | 检查格式，不修改文件          |
+| `pnpm lint`      | 检查主题和内容工具代码        |
+| `pnpm typecheck` | 运行 TypeScript 类型检查      |
+| `pnpm check`     | 依次运行格式、lint 和类型检查 |
+| `pnpm build`     | 类型检查并构建站点            |
+| `pnpm preview`   | 本地预览构建结果              |
+
+## 开发流程
+
+1. 阅读相关正文和 `src/contributing/` 中的维护说明。
+2. 修改正文时，同步更新节点、专题或导航元数据。
+3. 运行 `pnpm fmt`，检查格式化结果。
+4. 运行 `pnpm check` 和 `pnpm build`。
+
+新增学习节点时，在 `src/nodes/<domain>/<slug>/index.md` 创建入口页，并在 `src/.vitepress/content/nodes.ts` 注册。附属页还需加入节点的 `parts`；加入专题则更新 `topics.ts`。完整规则见[维护本书](src/contributing/index.md)。
+
+## 架构
+
+```text
+src/
+├── nodes/                 学习节点正文
+├── map/                   总学习图和专题入口
+├── problems/              按实际问题组织的排查入口
+├── reference/             阅读方法、术语和检索词
+├── contributing/          内容模型与维护说明
+└── .vitepress/
+    ├── content/           节点、专题、分类、导航和构建验证
+    ├── theme/             学习图组件与站点样式
+    └── config.ts          VitePress 配置
+```
+
+`nodes.ts` 是学习节点的注册表，也是节点 ID 和关系类型的类型来源。构建插件会检查页面是否存在、附属页和专题成员是否重复，以及必需先修关系是否成环。导航由注册表和专题数据生成，正文与元数据必须保持一致。
+
+更具体的开发和写作约束见 [AGENTS.md](AGENTS.md)。
