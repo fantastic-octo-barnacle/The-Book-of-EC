@@ -3,6 +3,7 @@ import { defineConfig } from "vitepress"
 import { learningGraphPlugin } from "./content/graph.ts"
 import { createSidebar } from "./content/navigation.ts"
 
+// 内容插件以 src 目录为根解析节点文件。
 const source = fileURLToPath(new URL("..", import.meta.url))
 
 export default defineConfig({
@@ -10,6 +11,7 @@ export default defineConfig({
   title: "The Book of EC",
   description: "面向 RoboMaster 新成员的嵌入式电控学习导航",
   head: [
+    // 首次渲染前恢复侧边栏状态，避免页面加载后闪动。
     [
       "script",
       {},

@@ -1,5 +1,7 @@
+/** 学习节点由浅入深的层级顺序。 */
 export const levels = ["intro", "core", "advanced", "integration"] as const
 
+/** 节点可选的学习层级。 */
 export type Level = (typeof levels)[number]
 
 export const levelLabels: Record<Level, string> = {
@@ -9,6 +11,7 @@ export const levelLabels: Record<Level, string> = {
   integration: "综合"
 }
 
+/** 节点可标注的概念词表。 */
 export const concepts = [
   "array",
   "bus-topology",
@@ -53,8 +56,10 @@ export const concepts = [
   "version-control"
 ] as const
 
+/** 概念词表中的合法值。 */
 export type Concept = (typeof concepts)[number]
 
+/** 节点可标注的技术词表。 */
 export const technologies = [
   "C",
   "C++",
@@ -76,4 +81,5 @@ export const technologies = [
   "Windows"
 ] as const
 
+/** 技术词表中的合法值。 */
 export type Technology = (typeof technologies)[number]

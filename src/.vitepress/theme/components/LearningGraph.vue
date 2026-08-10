@@ -4,9 +4,13 @@ import type { Core, ElementDefinition } from "cytoscape"
 import type { DagreLayoutOptions } from "cytoscape-dagre"
 import graph from "virtual:learning-graph"
 
+/** 虚拟模块提供的单个节点。 */
 type GraphNode = (typeof graph.nodes)[number]
 
-const props = defineProps<{ topic?: string }>()
+const props = defineProps<{
+  /** 仅展示指定专题；省略时展示全部节点。 */
+  topic?: string
+}>()
 const canvas = ref<HTMLDivElement | null>(null)
 const query = ref("")
 const selectedLevels = ref<string[]>([])
@@ -44,6 +48,7 @@ const allTechnologies = computed(() =>
   [...new Set(memberNodes.value.flatMap((node) => node.technologies))].sort()
 )
 
+/** 未选择筛选值时视为匹配全部，否则匹配任意一个值。 */
 function includesAny(values: string[], selected: string[]) {
   return selected.length === 0 || selected.some((value) => values.includes(value))
 }
@@ -66,6 +71,7 @@ const visibleMembers = computed(() => {
 const contextIds = computed(() => {
   if (!topic.value) return new Set<string>()
   const members = new Set(topic.value.members)
+  // 专题图保留可见成员的外部先修节点，避免割裂依赖上下文。
   return new Set(
     visibleMembers.value.flatMap((node) =>
       node.relations.map((relation) => relation.target).filter((target) => !members.has(target))
@@ -122,6 +128,7 @@ function resetFilters() {
   selectedTechnologies.value = []
 }
 
+/** 聚焦节点；专题外节点直接跳转到其详情页。 */
 function focusNode(id: string) {
   if (topic.value && !visibleIds.value.has(id)) {
     const node = byId.get(id)
@@ -132,10 +139,12 @@ function focusNode(id: string) {
   selectedId.value = id
 }
 
+/** 将当前全部图元素缩放到画布内。 */
 function fitGraph() {
   cy?.fit(cy.elements(), 36)
 }
 
+/** 切换画布尺寸，并尽量保持用户切换前的视觉缩放比例。 */
 async function toggleExpanded() {
   if (!cy || !canvas.value) {
     isExpanded.value = !isExpanded.value
@@ -155,11 +164,13 @@ async function toggleExpanded() {
   cy.fit(cy.elements(), 36)
   const safeZoom = cy.zoom()
   const proportionalZoom = previousZoom * widthRatio
+  // 既不突破最小缩放，也不放大到超出完整图的安全缩放值。
   const nextZoom = Math.max(cy.minZoom(), Math.min(proportionalZoom, safeZoom))
   cy.zoom(nextZoom)
   cy.center(cy.elements())
 }
 
+/** 将当前可见节点和关系转换为 Cytoscape 元素。 */
 function graphElements(): ElementDefinition[] {
   const nodes = visibleNodes.value.map((node) => ({
     group: "nodes" as const,
@@ -186,6 +197,7 @@ function graphElements(): ElementDefinition[] {
   return [...nodes, ...edges]
 }
 
+/** 仅突出选中节点及其直接相邻关系。 */
 function applyHighlight() {
   if (!cy) return
   cy.elements().removeClass("muted selected related")
@@ -199,11 +211,13 @@ function applyHighlight() {
   neighborhood.edges().addClass("related")
 }
 
+/** 重建图元素、执行布局并恢复交互高亮。 */
 function renderGraph() {
   if (!cy) return
   if (selectedId.value && !visibleIds.value.has(selectedId.value)) selectedId.value = null
   cy.elements().remove()
   cy.add(graphElements())
+  // 推荐关系不约束层级，避免弱关系改变必需依赖的主布局。
   const layoutElements = cy.nodes().union(cy.edges('[relation = "required"]'))
   const layoutOptions = {
     name: "dagre",
@@ -222,6 +236,7 @@ function renderGraph() {
 }
 
 onMounted(async () => {
+  // 图形库只在浏览器挂载后加载，避免在 SSR 期间初始化。
   const [{ default: cytoscape }, { default: dagre }] = await Promise.all([
     import("cytoscape"),
     import("cytoscape-dagre")

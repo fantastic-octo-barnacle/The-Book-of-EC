@@ -10,19 +10,23 @@ const hasSidebar = ref(false)
 const isDesktop = ref(false)
 let desktopQuery: MediaQueryList | undefined
 
+/** 将响应式折叠状态同步到全局样式类。 */
 function applyCollapsedState() {
   document.documentElement.classList.toggle(collapsedClass, collapsed.value)
 }
 
+/** 路由渲染完成后检查当前页面是否具有侧边栏。 */
 async function refreshSidebarAvailability() {
   await nextTick()
   hasSidebar.value = document.querySelector(".VPContent.has-sidebar") !== null
 }
 
+/** 同步桌面媒体查询的匹配状态。 */
 function handleDesktopChange(event: MediaQueryListEvent) {
   isDesktop.value = event.matches
 }
 
+/** 切换侧边栏并持久化用户选择。 */
 function toggleSidebar() {
   collapsed.value = !collapsed.value
   sessionStorage.setItem(storageKey, String(collapsed.value))
@@ -43,6 +47,7 @@ onMounted(() => {
 
 watch(
   () => route.path,
+  // 新页面 DOM 更新后重新判断侧边栏是否存在。
   () => void refreshSidebarAvailability()
 )
 

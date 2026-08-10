@@ -1,23 +1,46 @@
 import type { Concept, Level, Technology } from "./taxonomy.ts"
 
+/** 先修关系的强制程度。 */
 export type RelationType = "required" | "recommended"
 
+/** 节点附属页的导航信息。 */
 type NodePart = {
+  /** 附属页在侧边栏中的标题。 */
   title: string
+  /**
+   * 相对节点目录的无扩展名路径。
+   * - 充当网站页面路由的一部分。
+   * - 对应节点目录下的 Markdown 文件名。
+   */
   path: string
 }
 
+/** 节点注册项的公共结构。 */
 type NodeShape<Id extends string> = {
+  /** 节点显示名称。 */
   title: string
+  /** 节点学习目标的简述。 */
   summary: string
+  /** 建议学习阶段。 */
   level: Level
+  /** 完成节点的大致用时。 */
   estimatedTime: string
+  /** 节点覆盖的概念。 */
   concepts: readonly Concept[]
+  /** 节点涉及的技术。 */
   technologies: readonly Technology[]
-  relations: readonly { target: Id; type: RelationType }[]
+  /** 指向直接先修节点的关系。 */
+  relations: readonly {
+    /** 先修节点 ID。 */
+    target: Id
+    /** 关系的强制程度。 */
+    type: RelationType
+  }[]
+  /** 除入口页外的附属页。 */
   parts: readonly NodePart[]
 }
 
+/** 保留节点键的字面量类型，并限制关系只能指向注册节点。 */
 function defineNodes<const Registry extends Record<string, NodeShape<keyof Registry & string>>>(
   registry: Registry
 ) {
@@ -287,19 +310,26 @@ export const nodes = defineNodes({
   }
 })
 
+/** 节点注册表中的合法键。 */
 export type NodeId = keyof typeof nodes
 
+/** 任一已注册节点的定义。 */
 export type NodeDefinition = (typeof nodes)[NodeId]
 
+/** 前端使用的节点数据。 */
 export type GraphNode = NodeDefinition & {
+  /** 节点注册表键。 */
   id: NodeId
+  /** 节点入口页路由。 */
   route: string
 }
 
+/** 将点分隔的节点 ID 转换为目录式路由。 */
 export function nodeRoute(id: NodeId) {
   return `/nodes/${id.replaceAll(".", "/")}/`
 }
 
+/** 生成按中文标题排序的前端节点列表。 */
 export function graphNodes(): GraphNode[] {
   return (Object.entries(nodes) as [NodeId, NodeDefinition][])
     .map(([id, node]) => ({ ...node, id, route: nodeRoute(id) }))

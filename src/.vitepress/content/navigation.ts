@@ -2,6 +2,7 @@ import type { DefaultTheme } from "vitepress"
 import { nodeRoute, nodes, type NodeId } from "./nodes.ts"
 import { graphTopics } from "./topics.ts"
 
+/** 生成固定栏目及带附属页节点的侧边栏。 */
 export function createSidebar(): DefaultTheme.Sidebar {
   const sidebar: DefaultTheme.SidebarMulti = {
     "/map/": [
@@ -54,6 +55,7 @@ export function createSidebar(): DefaultTheme.Sidebar {
   }
 
   for (const [id, node] of Object.entries(nodes) as [NodeId, (typeof nodes)[NodeId]][]) {
+    // 无附属页的节点无需单独生成侧边栏分组。
     if (node.parts.length === 0) continue
     const route = nodeRoute(id)
     sidebar[route] = [
