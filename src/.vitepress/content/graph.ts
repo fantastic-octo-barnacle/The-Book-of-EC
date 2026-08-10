@@ -1,7 +1,7 @@
-import { existsSync } from "node:fs"
+import { existsSync, readdirSync } from "node:fs"
 import { join } from "node:path"
 import type { Plugin } from "vite"
-import { graphNodes, nodes, type NodeId } from "./nodes.ts"
+import { graphNodes, nodeIds, nodes, type NodeId } from "./nodes.ts"
 import { levels } from "./taxonomy.ts"
 import { graphTopics } from "./topics.ts"
 
@@ -10,10 +10,35 @@ function nodeDirectory(source: string, id: NodeId) {
   return join(source, "nodes", ...id.split("."))
 }
 
-/** 校验节点页面、必需依赖和专题成员。 */
+/** 收集节点目录中已经声明元数据的 ID。 */
+function metadataNodeIds(source: string) {
+  const root = join(source, "nodes")
+  return readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .flatMap((domain) =>
+      readdirSync(join(root, domain.name), { withFileTypes: true })
+        .filter(
+          (entry) =>
+            entry.isDirectory() && existsSync(join(root, domain.name, entry.name, "meta.ts"))
+        )
+        .map((entry) => `${domain.name}.${entry.name}`)
+    )
+}
+
+/** 校验节点元数据、页面、必需依赖和专题成员。 */
 export function validateContent(source: string) {
-  for (const [id, node] of Object.entries(nodes) as [NodeId, (typeof nodes)[NodeId]][]) {
+  const declaredIds = new Set<string>(nodeIds)
+  for (const id of metadataNodeIds(source)) {
+    if (!declaredIds.has(id)) throw new Error(`节点元数据使用了未声明的 ID：${id}`)
+  }
+
+  for (const id of nodeIds) {
     const directory = nodeDirectory(source, id)
+    if (!existsSync(join(directory, "meta.ts"))) {
+      throw new Error(`节点元数据不存在：${id}`)
+    }
+
+    const node = nodes[id]
     const paths = new Set<string>()
     for (const part of node.parts) {
       if (paths.has(part.path)) throw new Error(`学习节点包含重复页面：${id}/${part.path}`)
@@ -37,7 +62,7 @@ export function validateContent(source: string) {
     visiting.delete(id)
     visited.add(id)
   }
-  for (const id of Object.keys(nodes) as NodeId[]) visit(id)
+  for (const id of nodeIds) visit(id)
 
   for (const topic of graphTopics()) {
     if (new Set(topic.members).size !== topic.members.length) {

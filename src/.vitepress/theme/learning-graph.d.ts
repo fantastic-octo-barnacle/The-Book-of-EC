@@ -2,7 +2,7 @@ declare module "virtual:learning-graph" {
   /** 构建插件注入的学习图数据。 */
   const graph: {
     nodes: Array<{
-      /** 节点注册表键。 */
+      /** 节点的固定 ID。 */
       id: string
       /** 节点显示名称。 */
       title: string

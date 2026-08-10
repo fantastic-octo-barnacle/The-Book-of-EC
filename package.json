@@ -1,5 +1,9 @@
 {
   "type": "module",
+  "imports": {
+    "#content/*": "./src/.vitepress/content/*",
+    "#nodes/*": "./src/nodes/*"
+  },
   "scripts": {
     "dev": "vitepress dev src",
     "fmt": "oxfmt .",

@@ -20,4 +20,4 @@ pnpm check
 pnpm build
 ```
 
-`check` 依次检查格式、TypeScript 和主题代码；`build` 还会验证学习图内容并检查内部链接。
+`check` 依次检查格式、TypeScript 和主题代码；`build` 还会收集各节点的 `meta.ts`，验证学习图内容并检查内部链接。

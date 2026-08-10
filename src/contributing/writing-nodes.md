@@ -8,11 +8,12 @@ next: false
 
 ## 新增节点
 
-1. 在 `src/nodes/<domain>/<slug>/` 编写入口页及所需附属页。
-2. 在 `src/.vitepress/content/nodes.ts` 的注册表中增加节点定义。
-3. 按阅读顺序将全部页面加入 `parts`，入口页放在首项，`path` 包含 `.md` 扩展名。
-4. 如需进入专题，在 `topics.ts` 的 `members` 中加入节点 ID。
-5. 运行 `pnpm check` 和 `pnpm build`。
+1. 在 `src/.vitepress/content/nodes.ts` 的 `nodeIds` 中声明节点 ID。
+2. 在 `src/nodes/<domain>/<slug>/` 编写 Markdown 页面，并创建包含该 ID 的 `meta.ts`。
+3. 在 `nodes.ts` 中静态导入元数据并加入中央注册表。
+4. 按阅读顺序将全部页面加入 `parts`，入口页放在首项，`path` 包含 `.md` 扩展名。
+5. 如需进入专题，在 `topics.ts` 的 `members` 中加入节点 ID。
+6. 运行 `pnpm check` 和 `pnpm build`。
 
 ## 入口页建议
 

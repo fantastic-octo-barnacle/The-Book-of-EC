@@ -1,5 +1,5 @@
 import type { DefaultTheme } from "vitepress"
-import { nodePartRoute, nodeRoute, nodes, type NodeId } from "./nodes.ts"
+import { nodeIds, nodePartRoute, nodeRoute, nodes } from "./nodes.ts"
 import { graphTopics } from "./topics.ts"
 
 /** 生成固定栏目及多页节点的侧边栏。 */
@@ -54,7 +54,8 @@ export function createSidebar(): DefaultTheme.Sidebar {
     ]
   }
 
-  for (const [id, node] of Object.entries(nodes) as [NodeId, (typeof nodes)[NodeId]][]) {
+  for (const id of nodeIds) {
+    const node = nodes[id]
     // 单页节点无需单独生成侧边栏分组。
     if (node.parts.length === 1) continue
     const route = nodeRoute(id)
