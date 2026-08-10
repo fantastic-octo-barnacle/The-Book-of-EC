@@ -1,21 +1,3 @@
----
-{
-  "id": "embedded.rtos",
-  "title": "RTOS 并发基础",
-  "summary": "任务调度、同步原语与实时性约束。",
-  "level": "advanced",
-  "estimatedTime": "3h",
-  "concepts": ["concurrency", "shared-state", "priority", "synchronization"],
-  "technologies": ["FreeRTOS", "MCU"],
-  "relations":
-    [
-      { "target": "embedded.interrupts", "type": "required" },
-      { "target": "programming.object-lifetime", "type": "required" }
-    ],
-  "parts": []
-}
----
-
 # RTOS 并发基础
 
 ## 要点
@@ -27,3 +9,7 @@
 ## 检查题
 
 `count++` 为什么仍可能竞争？优先级反转在什么条件下发生？
+
+## 实验
+
+建立两个任务，通过队列传递递增计数；改为共享变量后观察错误，再使用合适的同步原语修复并说明选择依据。

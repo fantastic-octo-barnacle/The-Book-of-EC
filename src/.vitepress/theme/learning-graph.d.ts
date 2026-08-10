@@ -11,11 +11,11 @@ declare module "virtual:learning-graph" {
       relations: Array<{ target: string; type: "required" | "recommended" }>
       route: string
     }>
-    collections: Array<{
+    topics: Array<{
       id: string
       title: string
       summary: string
-      nodes: string[]
+      members: string[]
       route: string
     }>
     taxonomy: { levels: string[] }

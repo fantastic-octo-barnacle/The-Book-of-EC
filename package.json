@@ -9,7 +9,8 @@
     "typecheck": "vue-tsc --noEmit",
     "check": "pnpm run fmt:check && pnpm run lint && pnpm run typecheck",
     "build": "pnpm run typecheck && vitepress build src",
-    "preview": "vitepress preview src"
+    "preview": "vitepress preview src",
+    "test:e2e": "pnpm build && node tests/navigation.mjs"
   },
   "dependencies": {
     "cytoscape": "^3.34.0",

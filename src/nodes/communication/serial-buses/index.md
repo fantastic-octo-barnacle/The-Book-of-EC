@@ -1,21 +1,3 @@
----
-{
-  "id": "communication.serial-buses",
-  "title": "串行总线",
-  "summary": "UART、SPI、I²C 与 CAN 的电气和时序模型。",
-  "level": "core",
-  "estimatedTime": "3h",
-  "concepts": ["bus-topology", "synchronization", "logic-level"],
-  "technologies": ["UART", "SPI", "I2C", "CAN", "MCU"],
-  "relations":
-    [
-      { "target": "embedded.gpio", "type": "required" },
-      { "target": "embedded.drivers", "type": "recommended" }
-    ],
-  "parts": []
-}
----
-
 # 串行总线
 
 ## 要点
@@ -27,3 +9,7 @@
 ## 检查题
 
 UART 两端波特率偏差为何可能间歇出错？CAN 总线为什么通常在两端终端匹配？
+
+## 实验
+
+抓取一段已知 UART 或 SPI 传输波形，标出起始位、停止位或时钟边沿与采样点，并用配置解释解码结果。

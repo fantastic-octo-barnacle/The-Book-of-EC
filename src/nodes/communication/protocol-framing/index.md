@@ -1,21 +1,3 @@
----
-{
-  "id": "communication.protocol-framing",
-  "title": "帧与协议解析",
-  "summary": "消息边界、校验、恢复同步与缓冲区。",
-  "level": "core",
-  "estimatedTime": "3h",
-  "concepts": ["protocol", "frame", "CRC", "synchronization", "memory"],
-  "technologies": ["CAN", "UART"],
-  "relations":
-    [
-      { "target": "communication.serial-buses", "type": "required" },
-      { "target": "programming.pointers-arrays", "type": "recommended" }
-    ],
-  "parts": []
-}
----
-
 # 帧与协议解析
 
 ## 要点
@@ -27,3 +9,7 @@
 ## 检查题
 
 长度字段异常时如何避免永久失步？接收速率高于消费速率时应采用什么策略？
+
+## 实验
+
+为固定帧格式编写状态机解析器，输入随机垃圾字节或截断帧。要求丢弃坏帧，并在下一合法帧恢复同步。

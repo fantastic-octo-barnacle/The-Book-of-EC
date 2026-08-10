@@ -1,21 +1,3 @@
----
-{
-  "id": "control.estimation-actuation",
-  "title": "估计与执行器约束",
-  "summary": "滤波延迟、状态估计与电机的性能边界。",
-  "level": "advanced",
-  "estimatedTime": "3h",
-  "concepts": ["state-estimation", "sampling", "feedback", "saturation"],
-  "technologies": ["IMU", "motor"],
-  "relations":
-    [
-      { "target": "control.pid", "type": "required" },
-      { "target": "embedded.timers-dma", "type": "recommended" }
-    ],
-  "parts": []
-}
----
-
 # 估计与执行器约束
 
 ## 要点
@@ -27,3 +9,7 @@
 ## 检查题
 
 低通滤波为何可能降低稳定裕度？电流限制为何会影响位置环的瞬态性能？
+
+## 实验
+
+采集一段静止传感器数据，比较原始数据与一阶低通输出。测量噪声幅度和阶跃响应延迟，并说明对控制回路的影响。

@@ -1,17 +1,3 @@
----
-{
-  "id": "engineering.debugging",
-  "title": "调试与测量",
-  "summary": "以观测区分假设，并控制观测本身的影响。",
-  "level": "core",
-  "estimatedTime": "2h",
-  "concepts": ["debugging", "latency"],
-  "technologies": ["MCU"],
-  "relations": [{ "target": "programming.object-lifetime", "type": "recommended" }],
-  "parts": []
-}
----
-
 # 调试与测量
 
 ## 要点
@@ -23,3 +9,7 @@
 ## 检查题
 
 日志使故障消失，说明了什么？PWM 已输出而电机不转，下一步应测量什么？
+
+## 实验
+
+选一个会被周期调用的函数，分别用断点和计数日志确认调用频率。比较两种方法对时序的影响，并写下你会信任哪一个结论。

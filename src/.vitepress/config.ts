@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from "node:url"
 import { defineConfig } from "vitepress"
-import { learningGraphPlugin } from "./learning-graph.ts"
+import { learningGraphPlugin } from "./content/graph.ts"
+import { createSidebar } from "./content/navigation.ts"
 
 const source = fileURLToPath(new URL("..", import.meta.url))
 
@@ -13,59 +14,38 @@ export default defineConfig({
   },
   themeConfig: {
     nav: [
+      { text: "首页", link: "/" },
       { text: "学习图", link: "/map/" },
-      { text: "专题", link: "/collections/" },
-      { text: "标签", link: "/tags/" },
-      { text: "问题索引", link: "/problems/" },
-      { text: "参考库", link: "/reference/" }
+      { text: "问题排查", link: "/problems/" },
+      { text: "参考资料", link: "/reference/" },
+      { text: "维护本书", link: "/contributing/" }
     ],
-    sidebar: {
-      "/nodes/": [
-        {
-          text: "学习节点",
-          items: [
-            { text: "节点总览", link: "/map/" },
-            { text: "专题目录", link: "/collections/" },
-            { text: "标签索引", link: "/tags/" }
-          ]
-        }
-      ],
-      "/collections/": [
-        {
-          text: "专题",
-          items: [
-            { text: "总目录", link: "/collections/" },
-            { text: "工程与协作", link: "/collections/engineering" },
-            { text: "C/C++ 与程序运行", link: "/collections/programming" },
-            { text: "电子与嵌入式", link: "/collections/embedded" },
-            { text: "通信", link: "/collections/communication" },
-            { text: "控制与机器人", link: "/collections/control" },
-            { text: "RoboMaster 实践", link: "/collections/robotics" }
-          ]
-        }
-      ],
-      "/problems/": [
-        {
-          text: "我遇到了什么问题？",
-          items: [
-            { text: "索引", link: "/problems/" },
-            { text: "程序与构建", link: "/problems/software" },
-            { text: "硬件、通信与控制", link: "/problems/system" }
-          ]
-        }
-      ],
-      "/reference/": [
-        {
-          text: "参考库",
-          items: [
-            { text: "概览", link: "/reference/" },
-            { text: "如何读技术资料", link: "/reference/reading-docs" },
-            { text: "术语与检索词", link: "/reference/glossary" },
-            { text: "节点模板", link: "/reference/node-template" }
-          ]
-        }
-      ]
+    sidebar: createSidebar(),
+    outline: {
+      level: [2, 3],
+      label: "本页目录"
     },
+    search: {
+      provider: "local",
+      options: {
+        translations: {
+          button: { buttonText: "搜索", buttonAriaLabel: "搜索" },
+          modal: {
+            noResultsText: "没有找到相关内容",
+            resetButtonTitle: "清除查询",
+            footer: {
+              selectText: "选择",
+              navigateText: "切换",
+              closeText: "关闭"
+            }
+          }
+        }
+      }
+    },
+    docFooter: { prev: "上一节", next: "下一节" },
+    sidebarMenuLabel: "目录",
+    returnToTopLabel: "返回顶部",
+    darkModeSwitchLabel: "外观",
     socialLinks: []
   }
 })

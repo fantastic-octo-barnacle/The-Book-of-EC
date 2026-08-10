@@ -1,21 +1,3 @@
----
-{
-  "id": "embedded.timers-dma",
-  "title": "定时器、PWM 与 DMA",
-  "summary": "周期、脉宽与无 CPU 搬运的数据通路。",
-  "level": "core",
-  "estimatedTime": "3h",
-  "concepts": ["timer", "DMA", "sampling"],
-  "technologies": ["STM32", "MCU", "motor"],
-  "relations":
-    [
-      { "target": "embedded.clock-reset", "type": "required" },
-      { "target": "embedded.interrupts", "type": "recommended" }
-    ],
-  "parts": []
-}
----
-
 # 定时器、PWM 与 DMA
 
 ## 要点
@@ -27,3 +9,7 @@
 ## 检查题
 
 为何“配置为 1 kHz”仍可能测出错误频率？循环 DMA 缓冲区的生产者和消费者是谁？
+
+## 实验
+
+用定时器翻转 LED 或输出 PWM。手算频率，再用逻辑分析仪或示波器测量；解释时钟源、分频和测量精度造成的误差。

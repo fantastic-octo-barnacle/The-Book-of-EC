@@ -1,5 +1,7 @@
 ---
 title: 如何读技术资料
+prev: false
+next: false
 ---
 
 # 如何读技术资料

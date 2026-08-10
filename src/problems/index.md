@@ -1,13 +1,19 @@
 ---
-title: 问题索引
+title: 问题排查
+prev: false
+next: false
 ---
 
-# 我遇到了什么问题？
+# 问题排查
 
-从现象进入，但不要止于“解决了”。沿链接回到原理页，补齐下一次能自行定位所需的模型。
+从现象进入，但不要止于“解决了”。这里记录排查入口，原理和验证方法仍属于学习节点。
 
-- [程序与构建问题](/problems/software)：构建失败、改动不生效、程序跑飞、数据异常。
-- [硬件、通信与控制问题](/problems/system)：无法上电、无通信、丢包、电机不转、振荡与漂移。
+<div class="capability-map">
+  <a href="/problems/software-build"><strong>程序与构建</strong><span>构建失败、改动不生效、崩溃与竞态。</span></a>
+  <a href="/problems/hardware-bring-up"><strong>硬件与上电</strong><span>无法启动、无法下载与外设无响应。</span></a>
+  <a href="/problems/communication"><strong>通信</strong><span>乱码、丢帧、失步与数据异常。</span></a>
+  <a href="/problems/control-integration"><strong>控制与联调</strong><span>不转、反向、振荡、漂移与整机异常。</span></a>
+</div>
 
 ## 先做四件事
 

@@ -1,5 +1,7 @@
 ---
 title: 术语与检索词
+prev: false
+next: false
 ---
 
 # 术语与检索词

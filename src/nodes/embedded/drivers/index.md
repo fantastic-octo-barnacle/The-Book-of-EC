@@ -1,21 +1,3 @@
----
-{
-  "id": "embedded.drivers",
-  "title": "外设驱动边界",
-  "summary": "初始化、状态、错误与硬件抽象。",
-  "level": "core",
-  "estimatedTime": "2h",
-  "concepts": ["driver", "synchronization"],
-  "technologies": ["MCU"],
-  "relations":
-    [
-      { "target": "embedded.gpio", "type": "required" },
-      { "target": "embedded.interrupts", "type": "recommended" }
-    ],
-  "parts": []
-}
----
-
 # 外设驱动边界
 
 ## 要点
@@ -27,3 +9,7 @@
 ## 检查题
 
 传感器驱动为何需要超时与错误状态？上层依赖寄存器名会带来什么问题？
+
+## 实验
+
+为 LED、按键或传感器定义最小接口：初始化、读取或设置、错误状态。上层只包含接口头文件，不依赖芯片寄存器名。

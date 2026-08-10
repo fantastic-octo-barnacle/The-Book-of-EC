@@ -3,40 +3,56 @@ layout: home
 
 hero:
   name: "The Book of EC"
-  text: "嵌入式电控的学习导航"
-  tagline: 以学习节点、专题和依赖图组织的嵌入式电控知识库。
+  text: "嵌入式电控学习图"
+  tagline: 面向 RoboMaster 新成员，以学习节点和先修关系组织知识。
   actions:
     - theme: brand
       text: 打开学习图
       link: /map/
     - theme: alt
-      text: 我遇到问题了
+      text: 从问题开始
       link: /problems/
 
 features:
-  - title: 学习节点
-    details: 依赖图中的最小单位；可由入口页和附属页组成。
-  - title: 专题
-    details: 多个节点的人工阅读集合，不承担先修语义。
-  - title: 标签
-    details: 按概念、技术和学习层级筛选节点。
+  - title: 节点是正文
+    details: 每个节点解决一个明确的学习目标，可包含多个连续小节。
+  - title: 关系决定路径
+    details: 必需与建议先修构成学习图，不强加覆盖全书的线性顺序。
+  - title: 观测验证理解
+    details: 从检查题、练习、实验和真实故障中验证知识边界。
 ---
 
-## 浏览方式
+## 选择一个起点
+
+不必先规划完整路线。选择与你当前任务最近的入口，再沿图补齐先修知识。
 
 <div class="capability-map">
-  <a href="/map/"><strong>按依赖关系</strong><span>查看全部节点及必需/建议先修。</span></a>
-  <a href="/collections/"><strong>按专题阅读</strong><span>从工程、C/C++、嵌入式、控制等主题进入。</span></a>
-  <a href="/tags/"><strong>按标签筛选</strong><span>按概念、技术和学习层级检索。</span></a>
-  <a href="/problems/"><strong>按故障现象</strong><span>从构建、跑飞、丢包、抖动等现象反查节点。</span></a>
+  <a href="/nodes/engineering/shell-basics/"><strong>我要开始修改工程</strong><span>从文件、进程、退出码和标准流开始。</span></a>
+  <a href="/nodes/embedded/circuit-basics/"><strong>我要开始接触硬件</strong><span>从供电、参考地和逻辑电平开始。</span></a>
+  <a href="/nodes/control/sampling-model/"><strong>我要理解控制系统</strong><span>从对象、单位、状态和采样周期开始。</span></a>
 </div>
 
-## 约定
+## 学习图
 
-1. 学习节点是依赖图的唯一顶点；专题和标签都不构成先修条件。
-2. 每个节点只写必要元数据和内容入口；长内容拆入节点附属页。
-3. 实线依赖必须补齐；虚线依赖可并行学习。
+这是与“学习图”栏目相同的完整交互总图。选择节点查看先修和后续，或直接进入正文。
 
-::: info 范围
-本站不替代教材、芯片手册或项目文档；内容限于学习顺序、概念边界、检索词和验证方法。
+<LearningGraph />
+
+## 按专题浏览
+
+<div class="capability-map">
+  <a href="/map/topics/engineering"><strong>工程与协作</strong><span>命令行、版本管理和调试。</span></a>
+  <a href="/map/topics/programming"><strong>C/C++ 与程序运行</strong><span>构建、对象、指针与资源管理。</span></a>
+  <a href="/map/topics/embedded"><strong>电子与嵌入式</strong><span>板级约束、外设与并发。</span></a>
+  <a href="/map/topics/communication"><strong>通信</strong><span>串行总线、帧与协议。</span></a>
+  <a href="/map/topics/control"><strong>控制与机器人</strong><span>采样、反馈、PID 与估计。</span></a>
+  <a href="/map/topics/robotics"><strong>RoboMaster 实践</strong><span>板级启动与系统联调。</span></a>
+</div>
+
+## 从问题进入
+
+遇到构建、上电、通信或控制问题时，先记录现象和观测，再从[问题排查](/problems/)定位相关节点。
+
+::: info 本书的边界
+本站负责学习顺序、概念边界、检索词和验证方法，不替代教材、芯片手册或项目文档。
 :::

@@ -6,7 +6,7 @@ import graph from "virtual:learning-graph"
 
 type GraphNode = (typeof graph.nodes)[number]
 
-const props = defineProps<{ collection?: string }>()
+const props = defineProps<{ topic?: string }>()
 const canvas = ref<HTMLDivElement | null>(null)
 const query = ref("")
 const selectedLevels = ref<string[]>([])
@@ -29,24 +29,28 @@ const levelLabels: Record<string, string> = {
 
 const allNodes = graph.nodes
 const byId = new Map(allNodes.map((node) => [node.id, node]))
-const collection = computed(() =>
-  props.collection ? graph.collections.find((item) => item.id === props.collection) : undefined
+const topic = computed(() =>
+  props.topic ? graph.topics.find((item) => item.id === props.topic) : undefined
 )
-const scopeNodes = computed(() => {
-  if (!collection.value) return allNodes
-  const ids = new Set(collection.value.nodes)
+const memberNodes = computed(() => {
+  if (!topic.value) return allNodes
+  const ids = new Set(topic.value.members)
   return allNodes.filter((node) => ids.has(node.id))
 })
-const allConcepts = [...new Set(scopeNodes.value.flatMap((node) => node.concepts))].sort()
-const allTechnologies = [...new Set(scopeNodes.value.flatMap((node) => node.technologies))].sort()
+const allConcepts = computed(() =>
+  [...new Set(memberNodes.value.flatMap((node) => node.concepts))].sort()
+)
+const allTechnologies = computed(() =>
+  [...new Set(memberNodes.value.flatMap((node) => node.technologies))].sort()
+)
 
 function includesAny(values: string[], selected: string[]) {
   return selected.length === 0 || selected.some((value) => values.includes(value))
 }
 
-const visibleNodes = computed(() => {
+const visibleMembers = computed(() => {
   const needle = query.value.trim().toLowerCase()
-  return scopeNodes.value.filter((node) => {
+  return memberNodes.value.filter((node) => {
     const searchable = [node.id, node.title, node.summary, ...node.concepts, ...node.technologies]
       .join(" ")
       .toLowerCase()
@@ -58,6 +62,21 @@ const visibleNodes = computed(() => {
     )
   })
 })
+
+const contextIds = computed(() => {
+  if (!topic.value) return new Set<string>()
+  const members = new Set(topic.value.members)
+  return new Set(
+    visibleMembers.value.flatMap((node) =>
+      node.relations.map((relation) => relation.target).filter((target) => !members.has(target))
+    )
+  )
+})
+
+const visibleNodes = computed(() => [
+  ...visibleMembers.value,
+  ...allNodes.filter((node) => contextIds.value.has(node.id))
+])
 
 const visibleIds = computed(() => new Set(visibleNodes.value.map((node) => node.id)))
 const selected = computed(() => (selectedId.value ? byId.get(selectedId.value) : undefined))
@@ -104,6 +123,11 @@ function resetFilters() {
 }
 
 function focusNode(id: string) {
+  if (topic.value && !visibleIds.value.has(id)) {
+    const node = byId.get(id)
+    if (node) window.location.assign(node.route)
+    return
+  }
   if (!visibleIds.value.has(id)) resetFilters()
   selectedId.value = id
 }
@@ -139,7 +163,12 @@ async function toggleExpanded() {
 function graphElements(): ElementDefinition[] {
   const nodes = visibleNodes.value.map((node) => ({
     group: "nodes" as const,
-    data: { id: node.id, label: node.title, level: node.level }
+    data: {
+      id: node.id,
+      label: node.title,
+      level: node.level,
+      context: contextIds.value.has(node.id) ? "external" : "member"
+    }
   }))
   const edges = visibleNodes.value.flatMap((node) =>
     node.relations
@@ -244,6 +273,15 @@ onMounted(async () => {
       {
         selector: 'node[level = "integration"]',
         style: { "background-color": "#fff5e5", "border-color": "#e9c989" }
+      },
+      {
+        selector: 'node[context = "external"]',
+        style: {
+          "background-color": "#f4f5f7",
+          "border-color": "#aeb5c0",
+          "border-style": "dashed",
+          opacity: 0.64
+        }
       },
       {
         selector: "edge",

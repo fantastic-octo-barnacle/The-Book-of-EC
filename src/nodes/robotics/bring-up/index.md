@@ -1,22 +1,3 @@
----
-{
-  "id": "robotics.bring-up",
-  "title": "板级上电与启动",
-  "summary": "按供电、复位、时钟、下载和最小输出分层验证。",
-  "level": "core",
-  "estimatedTime": "2h",
-  "concepts": ["power", "reset", "startup", "debugging"],
-  "technologies": ["RoboMaster", "STM32", "MCU"],
-  "relations":
-    [
-      { "target": "embedded.circuit-basics", "type": "required" },
-      { "target": "embedded.clock-reset", "type": "required" },
-      { "target": "engineering.debugging", "type": "required" }
-    ],
-  "parts": []
-}
----
-
 # 板级上电与启动
 
 ## 要点
@@ -28,3 +9,7 @@
 ## 检查题
 
 下载可用而串口无输出，应按什么顺序排查？为什么不应跳过限流直接带电机上电？
+
+## 实验
+
+在限流条件下，按“电源轨 → 调试连接 → 最小 LED 或串口输出”完成上电检查表。每一步写明预期测量值与失败后的下一项测量。

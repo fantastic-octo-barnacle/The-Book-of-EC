@@ -1,17 +1,3 @@
----
-{
-  "id": "engineering.shell-basics",
-  "title": "命令行基础",
-  "summary": "文件、进程、退出码与标准流。",
-  "level": "intro",
-  "estimatedTime": "2h",
-  "concepts": ["shell", "process", "standard-stream"],
-  "technologies": ["Linux", "shell"],
-  "relations": [],
-  "parts": []
-}
----
-
 # 命令行基础
 
 ## 要点
@@ -27,3 +13,7 @@
 ## 延伸
 
 检索：`shell stdin stdout stderr`、`Linux process exit code`。
+
+## 实验
+
+在临时目录中分别执行成功和失败的命令，检查 `$?`。将标准输出和错误输出重定向到不同文件，并解释文件内容。
