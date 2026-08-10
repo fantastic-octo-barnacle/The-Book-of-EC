@@ -1,18 +1,18 @@
 ---
 {
-  'id': 'embedded.clock-reset',
-  'title': '时钟、复位与启动',
-  'summary': 'MCU 从上电到执行应用程序的路径。',
-  'level': 'core',
-  'estimatedTime': '2h',
-  'concepts': ['clock', 'reset', 'startup'],
-  'technologies': ['STM32', 'MCU'],
-  'relations':
+  "id": "embedded.clock-reset",
+  "title": "时钟、复位与启动",
+  "summary": "MCU 从上电到执行应用程序的路径。",
+  "level": "core",
+  "estimatedTime": "2h",
+  "concepts": ["clock", "reset", "startup"],
+  "technologies": ["STM32", "MCU"],
+  "relations":
     [
-      { 'target': 'embedded.circuit-basics', 'type': 'required' },
-      { 'target': 'programming.translation-linking', 'type': 'recommended' }
+      { "target": "embedded.circuit-basics", "type": "required" },
+      { "target": "programming.translation-linking", "type": "recommended" }
     ],
-  'parts': []
+  "parts": []
 }
 ---
 

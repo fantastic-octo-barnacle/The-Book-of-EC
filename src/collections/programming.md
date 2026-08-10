@@ -1,14 +1,14 @@
 ---
 {
-  'id': 'programming',
-  'title': 'C/C++ 与程序运行',
-  'summary': '从构建过程到内存对象与资源管理。',
-  'nodes':
+  "id": "programming",
+  "title": "C/C++ 与程序运行",
+  "summary": "从构建过程到内存对象与资源管理。",
+  "nodes":
     [
-      'programming.translation-linking',
-      'programming.object-lifetime',
-      'programming.pointers-arrays',
-      'programming.cpp-resource'
+      "programming.translation-linking",
+      "programming.object-lifetime",
+      "programming.pointers-arrays",
+      "programming.cpp-resource"
     ]
 }
 ---

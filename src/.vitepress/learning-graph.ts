@@ -1,13 +1,13 @@
-import { readdirSync, readFileSync } from 'node:fs'
-import { join, relative } from 'node:path'
-import type { Plugin } from 'vite'
-import { concepts, levels, technologies } from './knowledge-taxonomy.ts'
+import { readdirSync, readFileSync } from "node:fs"
+import { join, relative } from "node:path"
+import type { Plugin } from "vite"
+import { concepts, levels, technologies } from "./knowledge-taxonomy.ts"
 
 const knownLevels = new Set<string>(levels)
 const knownConcepts = new Set<string>(concepts)
 const knownTechnologies = new Set<string>(technologies)
 
-type Relation = { target: string; type: 'required' | 'recommended' }
+type Relation = { target: string; type: "required" | "recommended" }
 type Node = {
   id: string
   title: string
@@ -31,12 +31,12 @@ type Collection = {
 function walk(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const file = join(directory, entry.name)
-    return entry.isDirectory() ? walk(file) : entry.name === 'index.md' ? [file] : []
+    return entry.isDirectory() ? walk(file) : entry.name === "index.md" ? [file] : []
   })
 }
 
 function parseFrontmatter<T>(file: string): T {
-  const frontmatter = readFileSync(file, 'utf8').match(/^---\s*\n([\s\S]*?)\n---/)
+  const frontmatter = readFileSync(file, "utf8").match(/^---\s*\n([\s\S]*?)\n---/)
   if (!frontmatter) throw new Error(`学习节点缺少 frontmatter：${file}`)
 
   try {
@@ -73,7 +73,7 @@ function validate(nodes: Node[]) {
       if (!byId.has(relation.target)) {
         throw new Error(`学习节点 ${node.id} 引用了不存在的节点：${relation.target}`)
       }
-      if (!['required', 'recommended'].includes(relation.type)) {
+      if (!["required", "recommended"].includes(relation.type)) {
         throw new Error(`学习节点关系类型无效：${node.id}`)
       }
     }
@@ -82,11 +82,11 @@ function validate(nodes: Node[]) {
   const visiting = new Set<string>()
   const visited = new Set<string>()
   const visit = (id: string) => {
-    if (visiting.has(id)) throw new Error(`必需依赖存在环：${[...visiting, id].join(' → ')}`)
+    if (visiting.has(id)) throw new Error(`必需依赖存在环：${[...visiting, id].join(" → ")}`)
     if (visited.has(id)) return
     visiting.add(id)
     for (const relation of byId.get(id)!.relations ?? []) {
-      if (relation.type === 'required') visit(relation.target)
+      if (relation.type === "required") visit(relation.target)
     }
     visiting.delete(id)
     visited.add(id)
@@ -115,37 +115,37 @@ function validateCollections(collections: Collection[], nodes: Node[]) {
 }
 
 function collectNodes(source: string): Node[] {
-  const root = join(source, 'nodes')
+  const root = join(source, "nodes")
   const nodes = walk(root)
-    .filter((file) => file !== join(root, 'index.md'))
+    .filter((file) => file !== join(root, "index.md"))
     .map((file) => {
       const route = `/${relative(source, file)
-        .replace(/\\/g, '/')
-        .replace(/\/index\.md$/, '/')}`
-      return { ...parseFrontmatter<Omit<Node, 'route'>>(file), route }
+        .replace(/\\/g, "/")
+        .replace(/\/index\.md$/, "/")}`
+      return { ...parseFrontmatter<Omit<Node, "route">>(file), route }
     })
   validate(nodes)
-  return nodes.sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'))
+  return nodes.sort((a, b) => a.title.localeCompare(b.title, "zh-CN"))
 }
 
 function collectCollections(source: string): Collection[] {
-  const root = join(source, 'collections')
+  const root = join(source, "collections")
   return readdirSync(root, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name !== 'index.md' && entry.name.endsWith('.md'))
+    .filter((entry) => entry.isFile() && entry.name !== "index.md" && entry.name.endsWith(".md"))
     .map((entry) => {
       const file = join(root, entry.name)
-      const route = `/${relative(source, file).replace(/\\/g, '/').replace(/\.md$/, '')}`
-      return { ...parseFrontmatter<Omit<Collection, 'route'>>(file), route }
+      const route = `/${relative(source, file).replace(/\\/g, "/").replace(/\.md$/, "")}`
+      return { ...parseFrontmatter<Omit<Collection, "route">>(file), route }
     })
-    .sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'))
+    .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"))
 }
 
 export function learningGraphPlugin(source: string): Plugin {
-  const virtualId = 'virtual:learning-graph'
+  const virtualId = "virtual:learning-graph"
   const resolvedId = `\0${virtualId}`
 
   return {
-    name: 'learning-graph',
+    name: "learning-graph",
     resolveId(id) {
       return id === virtualId ? resolvedId : undefined
     },

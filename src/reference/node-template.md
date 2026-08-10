@@ -9,19 +9,19 @@ title: 知识节点模板
 ```md
 ---
 {
-  'id': 'programming.example',
-  'title': '节点名称',
-  'summary': '一句话说明该节点解决的问题。',
-  'level': 'intro | core | advanced | integration',
-  'estimatedTime': '2h',
-  'concepts': ['object', 'lifetime'],
-  'technologies': ['C'],
-  'relations':
+  "id": "programming.example",
+  "title": "节点名称",
+  "summary": "一句话说明该节点解决的问题。",
+  "level": "intro | core | advanced | integration",
+  "estimatedTime": "2h",
+  "concepts": ["object", "lifetime"],
+  "technologies": ["C"],
+  "relations":
     [
-      { 'target': 'other.node', 'type': 'required' },
-      { 'target': 'other.optional-node', 'type': 'recommended' }
+      { "target": "other.node", "type": "required" },
+      { "target": "other.optional-node", "type": "recommended" }
     ],
-  'parts': [{ 'title': '实验', 'path': 'practice', 'type': 'practice' }]
+  "parts": [{ "title": "实验", "path": "practice", "type": "practice" }]
 }
 ---
 

@@ -1,9 +1,9 @@
 ---
 {
-  'id': 'robotics',
-  'title': 'RoboMaster 实践',
-  'summary': '板级启动和跨模块系统联调。',
-  'nodes': ['robotics.bring-up', 'robotics.system-integration']
+  "id": "robotics",
+  "title": "RoboMaster 实践",
+  "summary": "板级启动和跨模块系统联调。",
+  "nodes": ["robotics.bring-up", "robotics.system-integration"]
 }
 ---
 

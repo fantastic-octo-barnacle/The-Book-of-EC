@@ -180,7 +180,7 @@
   place-items: center;
 }
 .graph-canvas-actions button:hover,
-.graph-canvas-actions button[aria-pressed='true'] {
+.graph-canvas-actions button[aria-pressed="true"] {
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
 }

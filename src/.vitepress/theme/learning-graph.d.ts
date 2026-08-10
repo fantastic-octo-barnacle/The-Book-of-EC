@@ -1,4 +1,4 @@
-declare module 'virtual:learning-graph' {
+declare module "virtual:learning-graph" {
   const graph: {
     nodes: Array<{
       id: string
@@ -8,7 +8,7 @@ declare module 'virtual:learning-graph' {
       estimatedTime: string
       concepts: string[]
       technologies: string[]
-      relations: Array<{ target: string; type: 'required' | 'recommended' }>
+      relations: Array<{ target: string; type: "required" | "recommended" }>
       route: string
     }>
     collections: Array<{

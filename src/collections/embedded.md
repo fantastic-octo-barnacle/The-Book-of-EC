@@ -1,17 +1,17 @@
 ---
 {
-  'id': 'embedded',
-  'title': '电子与嵌入式',
-  'summary': '从板级约束到 MCU、外设与并发。',
-  'nodes':
+  "id": "embedded",
+  "title": "电子与嵌入式",
+  "summary": "从板级约束到 MCU、外设与并发。",
+  "nodes":
     [
-      'embedded.circuit-basics',
-      'embedded.clock-reset',
-      'embedded.gpio',
-      'embedded.interrupts',
-      'embedded.timers-dma',
-      'embedded.drivers',
-      'embedded.rtos'
+      "embedded.circuit-basics",
+      "embedded.clock-reset",
+      "embedded.gpio",
+      "embedded.interrupts",
+      "embedded.timers-dma",
+      "embedded.drivers",
+      "embedded.rtos"
     ]
 }
 ---

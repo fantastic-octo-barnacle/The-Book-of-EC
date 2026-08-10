@@ -1,9 +1,9 @@
 ---
 {
-  'id': 'engineering',
-  'title': '工程与协作',
-  'summary': '命令行、版本管理和调试的工程基础。',
-  'nodes': ['engineering.shell-basics', 'engineering.git-model', 'engineering.debugging']
+  "id": "engineering",
+  "title": "工程与协作",
+  "summary": "命令行、版本管理和调试的工程基础。",
+  "nodes": ["engineering.shell-basics", "engineering.git-model", "engineering.debugging"]
 }
 ---
 
