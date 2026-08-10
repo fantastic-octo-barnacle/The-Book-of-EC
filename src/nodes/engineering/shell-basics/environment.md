@@ -26,15 +26,18 @@ $env:BOOK_OF_EC_LAB
 
 ## PATH 是有顺序的目录列表
 
-`PATH` 保存一组目录。输入外部程序名而没有提供路径时，系统按规则在这些位置中查找程序；顺序靠前的同名程序可能遮蔽后面的版本。
+`PATH` 是一个有特殊作用的环境变量，它保存了一组目录。输入外部程序名而没有提供路径时，系统按规则在这些目录中查找程序；顺序靠前的同名程序可能遮蔽后面的版本。
 
-在 PowerShell 中将 `PATH` 拆成多行查看：
+- 在 PowerShell 中查看：
+  ```powershell
+  $env:PATH
+  ```
+- 在 Bash、Zsh 等 POSIX Shell 中查看：
+  ```sh
+  echo $PATH
+  ```
 
-```powershell
-$env:PATH -split [IO.Path]::PathSeparator
-```
-
-Windows 通常用分号分隔各项，Linux/macOS 通常用冒号。不要手动根据显示文本猜分隔符，上面的写法会使用当前平台的分隔符。
+Windows 通常用分号分隔各项，Linux/macOS 通常用冒号。
 
 `PATH` 与当前工作目录是两个不同概念：
 

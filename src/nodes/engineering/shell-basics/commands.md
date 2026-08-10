@@ -58,43 +58,43 @@ ls -a
 
 - 选项和值用空格分开：
 
-```sh
-git log -n 5
-```
+  ```sh
+  git log -n 5
+  ```
 
-Shell 会产生两个参数：`-n` 和 `5`，Git 将 `5` 解释为 `-n` 的值。
+  Shell 会产生两个参数：`-n` 和 `5`，Git 将 `5` 解释为 `-n` 的值。
 
 - 等号连接选项和值：
 
-```sh
-git log --max-count=5
-```
+  ```sh
+  git log --max-count=5
+  ```
 
-`--max-count=5` 是一个参数，Git 在其内部拆出选项名和值。
+  `--max-count=5` 是一个参数，Git 在其内部拆出选项名和值。
 
 - 短选项和值直接连写：
 
-```sh
-clang -Iinclude -DNDEBUG main.c
-```
+  ```sh
+  clang -Iinclude -DNDEBUG main.c
+  ```
 
-Clang 将 `include` 解释为一个头文件搜索目录，`NDEBUG` 解释为一个宏定义。`-I`、`-D` 都是短选项，后面紧跟的文本就是它们的值。
+  Clang 将 `include` 解释为一个头文件搜索目录，`NDEBUG` 解释为一个宏定义。`-I`、`-D` 都是短选项，后面紧跟的文本就是它们的值。
 
 - 重复选项以提供多个值：
 
-```sh
-clang -Iinclude -Ithird_party/include main.c
-```
+  ```sh
+  clang -Iinclude -Ithird_party/include main.c
+  ```
 
-两次 `-I` 各提供一个目录：先后将 `include`、`third_party/include` 添加到头文件搜索路径中。
+  两次 `-I` 各提供一个目录：先后将 `include`、`third_party/include` 添加到头文件搜索路径中。
 
 - 一个选项后跟多个值：
 
-```sh
-cmake --build build --target app tests
-```
+  ```sh
+  cmake --build build --target app tests
+  ```
 
-CMake 将 `build` 作为 `--build` 的值，`app`、`tests` 都作为 `--target` 的值。
+  CMake 将 `build` 作为 `--build` 的值，`app`、`tests` 都作为 `--target` 的值。
 
 这些形式不能随意互换。某个程序支持 `--option=value`，不代表它也支持 `--option value`；逗号可能是分隔符，也可能只是值中的普通字符。对原生程序而言，空白和引号先决定传入几个参数，程序再解释每个参数；对 PowerShell cmdlet 而言，PowerShell 还会按参数声明进行类型转换和绑定。准确写法应以当前工具的帮助和官方文档为准。
 
