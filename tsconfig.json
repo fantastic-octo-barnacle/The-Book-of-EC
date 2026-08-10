@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/.vitepress/**/*.ts",
+    "src/.vitepress/**/*.tsx",
+    "src/.vitepress/**/*.vue",
+    "src/.vitepress/**/*.d.ts"
+  ],
+  "exclude": ["src/.vitepress/cache", "src/.vitepress/dist"]
+}

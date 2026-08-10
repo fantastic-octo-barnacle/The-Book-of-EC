@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { Core, ElementDefinition } from 'cytoscape'
+import type { DagreLayoutOptions } from 'cytoscape-dagre'
 import graph from 'virtual:learning-graph'
 
 type GraphNode = typeof graph.nodes[number]
@@ -161,7 +162,7 @@ function renderGraph() {
   cy.elements().remove()
   cy.add(graphElements())
   const layoutElements = cy.nodes().union(cy.edges('[relation = "required"]'))
-  layoutElements.layout({
+  const layoutOptions = {
     name: 'dagre',
     rankDir: 'LR',
     rankSep: 95,
@@ -171,7 +172,8 @@ function renderGraph() {
     animate: false,
     nodeDimensionsIncludeLabels: true,
     sort: (a, b) => a.id().localeCompare(b.id())
-  }).run()
+  } satisfies DagreLayoutOptions
+  layoutElements.layout(layoutOptions).run()
   fitGraph()
   applyHighlight()
 }
@@ -191,7 +193,7 @@ onMounted(async () => {
     wheelSensitivity: 1.35,
     userZoomingEnabled: true,
     userPanningEnabled: true,
-    userBoxSelectionEnabled: false,
+    boxSelectionEnabled: false,
     autounselectify: true,
     style: [
       {
@@ -202,7 +204,7 @@ onMounted(async () => {
           height: 68,
           label: 'data(label)',
           'text-wrap': 'wrap',
-          'text-max-width': 164,
+          'text-max-width': '164px',
           'font-size': 14,
           'font-weight': 600,
           color: '#243147',
