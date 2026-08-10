@@ -6,10 +6,10 @@ title: 工程基础
 
 工程基础决定你能否可靠地修改、复现和定位问题。这里的目标不是记住命令，而是理解每个工具在保存什么状态、改变什么状态。
 
-| 从什么现象出发 | 先看什么 |
-| --- | --- |
-| 不知道命令在做什么 | [命令行与 Linux](/foundations/command-line) |
-| 害怕 merge、rebase 或丢改动 | [Git 协作](/foundations/git) |
-| 程序“没反应”、结果不对 | [调试方法](/foundations/debugging) |
+| 从什么现象出发              | 先看什么                                    |
+| --------------------------- | ------------------------------------------- |
+| 不知道命令在做什么          | [命令行与 Linux](/foundations/command-line) |
+| 害怕 merge、rebase 或丢改动 | [Git 协作](/foundations/git)                |
+| 程序“没反应”、结果不对      | [调试方法](/foundations/debugging)          |
 
 下一步：[C 语言运行模型](/programming/c-runtime)。

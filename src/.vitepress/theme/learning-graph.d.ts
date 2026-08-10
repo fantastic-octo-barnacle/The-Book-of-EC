@@ -1,15 +1,15 @@
 declare module 'virtual:learning-graph' {
   const graph: {
     nodes: Array<{
-    id: string
-    title: string
-    summary: string
-    level: string
-    estimatedTime: string
-    concepts: string[]
-    technologies: string[]
-    relations: Array<{ target: string, type: 'required' | 'recommended' }>
-    route: string
+      id: string
+      title: string
+      summary: string
+      level: string
+      estimatedTime: string
+      concepts: string[]
+      technologies: string[]
+      relations: Array<{ target: string; type: 'required' | 'recommended' }>
+      route: string
     }>
     collections: Array<{
       id: string

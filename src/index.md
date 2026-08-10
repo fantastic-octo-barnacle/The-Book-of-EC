@@ -2,8 +2,8 @@
 layout: home
 
 hero:
-  name: "The Book of EC"
-  text: "嵌入式电控的学习导航"
+  name: 'The Book of EC'
+  text: '嵌入式电控的学习导航'
   tagline: 以学习节点、专题和依赖图组织的嵌入式电控知识库。
   actions:
     - theme: brand

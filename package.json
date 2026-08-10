@@ -1,17 +1,5 @@
 {
   "type": "module",
-  "devDependencies": {
-    "@types/cytoscape-dagre": "^2.3.4",
-    "@types/node": "^24.13.3",
-    "oxfmt": "0.62.0",
-    "oxlint": "1.77.0",
-    "playwright": "1.55.0",
-    "typescript": "^5.9.3",
-    "vite": "8.2.1",
-    "vitepress": "2.0.0-alpha.19",
-    "vue": "3.5.41",
-    "vue-tsc": "^3.3.9"
-  },
   "scripts": {
     "dev": "vitepress dev src",
     "fmt": "oxfmt .",
@@ -26,5 +14,17 @@
   "dependencies": {
     "cytoscape": "^3.34.0",
     "cytoscape-dagre": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/cytoscape-dagre": "^2.3.4",
+    "@types/node": "^24.13.3",
+    "oxfmt": "0.62.0",
+    "oxlint": "1.77.0",
+    "playwright": "1.55.0",
+    "typescript": "^5.9.3",
+    "vite": "8.2.1",
+    "vitepress": "2.0.0-alpha.19",
+    "vue": "3.5.41",
+    "vue-tsc": "^3.3.9"
   }
 }

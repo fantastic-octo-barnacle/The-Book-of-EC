@@ -1,14 +1,14 @@
 ---
 {
-  "id": "engineering.git-model",
-  "title": "Git 状态模型",
-  "summary": "工作区、暂存区、提交与引用。",
-  "level": "intro",
-  "estimatedTime": "2h",
-  "concepts": ["version-control"],
-  "technologies": ["Git"],
-  "relations": [{ "target": "engineering.shell-basics", "type": "recommended" }],
-  "parts": [{ "title": "练习", "path": "practice", "type": "practice" }]
+  'id': 'engineering.git-model',
+  'title': 'Git 状态模型',
+  'summary': '工作区、暂存区、提交与引用。',
+  'level': 'intro',
+  'estimatedTime': '2h',
+  'concepts': ['version-control'],
+  'technologies': ['Git'],
+  'relations': [{ 'target': 'engineering.shell-basics', 'type': 'recommended' }],
+  'parts': [{ 'title': '练习', 'path': 'practice', 'type': 'practice' }]
 }
 ---
 

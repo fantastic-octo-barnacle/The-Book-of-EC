@@ -8,9 +8,5 @@
   "trailingComma": "none",
   "endOfLine": "lf",
   "proseWrap": "preserve",
-  "ignorePatterns": [
-    "node_modules/**",
-    "src/.vitepress/cache/**",
-    "src/.vitepress/dist/**"
-  ]
+  "ignorePatterns": ["node_modules/**", "src/.vitepress/cache/**", "src/.vitepress/dist/**"]
 }

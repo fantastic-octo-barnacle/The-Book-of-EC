@@ -7,7 +7,7 @@ const knownLevels = new Set<string>(levels)
 const knownConcepts = new Set<string>(concepts)
 const knownTechnologies = new Set<string>(technologies)
 
-type Relation = { target: string, type: 'required' | 'recommended' }
+type Relation = { target: string; type: 'required' | 'recommended' }
 type Node = {
   id: string
   title: string
@@ -62,7 +62,10 @@ function validate(nodes: Node[]) {
     if (!node.concepts?.length || node.concepts.some((concept) => !knownConcepts.has(concept))) {
       throw new Error(`学习节点包含未知 concepts 标签：${node.id}`)
     }
-    if (!node.technologies?.length || node.technologies.some((technology) => !knownTechnologies.has(technology))) {
+    if (
+      !node.technologies?.length ||
+      node.technologies.some((technology) => !knownTechnologies.has(technology))
+    ) {
       throw new Error(`学习节点包含未知 technologies 标签：${node.id}`)
     }
     for (const relation of node.relations ?? []) {
@@ -103,7 +106,8 @@ function validateCollections(collections: Collection[], nodes: Node[]) {
     if (!collection.nodes?.length) throw new Error(`专题没有成员节点：${collection.id}`)
     const members = new Set<string>()
     for (const nodeId of collection.nodes) {
-      if (!nodeIds.has(nodeId)) throw new Error(`专题 ${collection.id} 引用了不存在的节点：${nodeId}`)
+      if (!nodeIds.has(nodeId))
+        throw new Error(`专题 ${collection.id} 引用了不存在的节点：${nodeId}`)
       if (members.has(nodeId)) throw new Error(`专题 ${collection.id} 重复引用节点：${nodeId}`)
       members.add(nodeId)
     }
@@ -112,10 +116,14 @@ function validateCollections(collections: Collection[], nodes: Node[]) {
 
 function collectNodes(source: string): Node[] {
   const root = join(source, 'nodes')
-  const nodes = walk(root).filter((file) => file !== join(root, 'index.md')).map((file) => {
-    const route = `/${relative(source, file).replace(/\\/g, '/').replace(/\/index\.md$/, '/')}`
-    return { ...parseFrontmatter<Omit<Node, 'route'>>(file), route }
-  })
+  const nodes = walk(root)
+    .filter((file) => file !== join(root, 'index.md'))
+    .map((file) => {
+      const route = `/${relative(source, file)
+        .replace(/\\/g, '/')
+        .replace(/\/index\.md$/, '/')}`
+      return { ...parseFrontmatter<Omit<Node, 'route'>>(file), route }
+    })
   validate(nodes)
   return nodes.sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'))
 }

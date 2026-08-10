@@ -1,9 +1,9 @@
 ---
 {
-  "id": "communication",
-  "title": "通信",
-  "summary": "总线约束、帧语义与协议诊断。",
-  "nodes": ["communication.serial-buses", "communication.protocol-framing"]
+  'id': 'communication',
+  'title': '通信',
+  'summary': '总线约束、帧语义与协议诊断。',
+  'nodes': ['communication.serial-buses', 'communication.protocol-framing']
 }
 ---
 

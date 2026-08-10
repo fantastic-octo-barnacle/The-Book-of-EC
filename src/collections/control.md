@@ -1,9 +1,10 @@
 ---
 {
-  "id": "control",
-  "title": "控制与机器人",
-  "summary": "采样、反馈、PID 与估计。",
-  "nodes": ["control.sampling-model", "control.feedback", "control.pid", "control.estimation-actuation"]
+  'id': 'control',
+  'title': '控制与机器人',
+  'summary': '采样、反馈、PID 与估计。',
+  'nodes':
+    ['control.sampling-model', 'control.feedback', 'control.pid', 'control.estimation-actuation']
 }
 ---
 

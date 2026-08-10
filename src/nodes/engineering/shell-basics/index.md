@@ -1,14 +1,14 @@
 ---
 {
-  "id": "engineering.shell-basics",
-  "title": "命令行基础",
-  "summary": "文件、进程、退出码与标准流。",
-  "level": "intro",
-  "estimatedTime": "2h",
-  "concepts": ["shell", "process", "standard-stream"],
-  "technologies": ["Linux", "shell"],
-  "relations": [],
-  "parts": []
+  'id': 'engineering.shell-basics',
+  'title': '命令行基础',
+  'summary': '文件、进程、退出码与标准流。',
+  'level': 'intro',
+  'estimatedTime': '2h',
+  'concepts': ['shell', 'process', 'standard-stream'],
+  'technologies': ['Linux', 'shell'],
+  'relations': [],
+  'parts': []
 }
 ---
 
