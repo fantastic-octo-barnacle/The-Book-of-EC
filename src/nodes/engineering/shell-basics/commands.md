@@ -6,7 +6,7 @@
 
 观察下面这条命令：
 
-```text
+```sh
 git log --oneline -n 5
 ```
 
@@ -20,34 +20,100 @@ Shell 会把它交给程序时保留参数的顺序：
 | 第三个参数 | `-n`        | 短选项               |
 | 第四个参数 | `5`         | `-n` 的值            |
 
-“位置参数”“选项”“子命令”是程序赋予参数的语义，不是 Shell 从拼写中强制规定的。`-h`、`--help`、短选项和长选项只是常见约定，不是所有工具共同遵守的语法标准。
+“位置参数（Positional Parameters）”“选项（Options）”“子命令（Subcommands）”是程序赋予参数的语义，不是 Shell 从拼写中强制规定的。短选项、长选项也只是常见约定，不是所有工具共同遵守的语法标准。
 
 有些工具允许把短选项合并，有些工具使用 `/help`，还有些工具只接受固定位置的参数。不要仅凭外形推断一个陌生选项一定有效。
+
+::: tip 先判断失败发生在哪一层
+
+- Shell 报“无法识别”或“command not found”：通常还没有找到并启动程序。
+- 程序报“unknown option”：程序已经启动，但不接受该参数。
+- 程序报“missing argument”：选项可能存在，但缺少选项值或位置参数。
+
+:::
+
+### 长选项、短选项
+
+长选项通常以两个连字符开头，例如 `--help`；短选项以一个连字符开头，例如 `-h`。长选项通常更易读，而短选项则更节省空间。
+
+很多时候，长选项会有一个对应的短选项别名。例如：
+
+```sh
+# 查看 Git 版本：
+git --version
+git -v
+
+# 查看 CMake 帮助：
+cmake --help
+cmake -h
+
+# 列出所有文件（包括隐藏文件）：
+ls --all
+ls -a
+```
+
+### 带值选项
+
+有些选项接收一个或多个值，但不同程序传值的方式并不统一。常见的写法有：
+
+- 选项和值用空格分开：
+
+```sh
+git log -n 5
+```
+
+Shell 会产生两个参数：`-n` 和 `5`，Git 将 `5` 解释为 `-n` 的值。
+
+- 等号连接选项和值：
+
+```sh
+git log --max-count=5
+```
+
+`--max-count=5` 是一个参数，Git 在其内部拆出选项名和值。
+
+- 短选项和值直接连写：
+
+```sh
+clang -Iinclude -DNDEBUG main.c
+```
+
+Clang 将 `include` 解释为一个头文件搜索目录，`NDEBUG` 解释为一个宏定义。`-I`、`-D` 都是短选项，后面紧跟的文本就是它们的值。
+
+- 重复选项以提供多个值：
+
+```sh
+clang -Iinclude -Ithird_party/include main.c
+```
+
+两次 `-I` 各提供一个目录：先后将 `include`、`third_party/include` 添加到头文件搜索路径中。
+
+- 一个选项后跟多个值：
+
+```sh
+cmake --build build --target app tests
+```
+
+CMake 将 `build` 作为 `--build` 的值，`app`、`tests` 都作为 `--target` 的值。
+
+这些形式不能随意互换。某个程序支持 `--option=value`，不代表它也支持 `--option value`；逗号可能是分隔符，也可能只是值中的普通字符。对原生程序而言，空白和引号先决定传入几个参数，程序再解释每个参数；对 PowerShell cmdlet 而言，PowerShell 还会按参数声明进行类型转换和绑定。准确写法应以当前工具的帮助和官方文档为准。
 
 ## 空白和引号决定参数边界
 
 Shell 通常用空白分隔参数。先只观察参数边界：
 
-```text
+```sh
 tool one two
 tool "one two"
 ```
 
 第一行中的 `one` 和 `two` 是两个参数，第二行中的 `one two` 是一个参数。文件名或目录名含有空格时也需要引号：
 
-```powershell
-cd "C:\Program Files"
+```sh
+git add hello.txt world.txt "hello world.txt"
 ```
 
-PowerShell 的单引号表示字面文本，双引号允许替换变量：
-
-```powershell
-$name = 'EC'
-'hello $name'
-"hello $name"
-```
-
-预期输出分别是 `hello $name` 和 `hello EC`。本节点不展开嵌套引号、转义和命令替换；遇到复杂命令时应查阅当前 Shell 的引用规则，不能把 Bash、PowerShell 和 `cmd.exe` 的写法混用。
+Shell 会把它们拆成四个参数：`add`、`hello.txt`、`world.txt` 和 `hello world.txt`。
 
 ## 命令不一定是可执行文件
 
@@ -64,102 +130,89 @@ PowerShell 可以运行多种“命令”：
 ```powershell
 Get-Command ls
 Get-Command git
-Get-Command where -All
+Get-Command where
 ```
 
-关注输出中的 `CommandType`、`Name`、`Version` 和 `Source`。`-All` 会显示被同名命令遮蔽的其他候选项。例如 PowerShell 中的 `where` 可能是 `Where-Object` 的别名；要明确调用 Windows 外部程序可以写 `where.exe`。
+在 Bash、Zsh 等 POSIX Shell 中，则可以使用：
 
-在 Bash、Zsh 等 POSIX Shell 中，可以使用：
-
-```sh
-command -v ls
-command -v git
+```bash
+which ls
+which git
+which where
 ```
 
 不同 Shell 的解析顺序并不完全相同。可靠的结论应来自当前会话的查询结果，而不是“我记得这个名字一般是什么”。
 
-## 猜测帮助入口，然后查证
+## 帮助和版本
 
-对陌生工具，可以依次尝试常见入口：
+### 帮助信息
 
-```text
-tool -h
-tool --help
-tool help
-tool help subcommand
+各种程序通常都会提供帮助信息，告知我们如何使用。一些常见程序及查看它们的帮助信息的方法如下：
+
+```sh
+# Git 的帮助入口：
+git --help         # 长选项形式
+git -h             # 短选项形式
+git help           # 子命令形式
+
+# 列出所有 Git 子命令：
+git help -a
+
+# 查询 Git 某一子命令的帮助（以 `log` 为例）：
+git help log
+
+# Python 的帮助入口：
+python --help
+python -h
+
+# GCC、Clang、CMake 的帮助入口：
+gcc --help
+clang --help
+cmake --help
 ```
 
-PowerShell cmdlet 应优先使用 `Get-Help`：
+可以看出帮助入口的写法并不统一，但有一些常见约定。遇到陌生的应用程序时，可以先尝试这些常见写法打开其帮助文档。
+
+对于 PowerShell cmdlet 应优先使用 `Get-Help`：
 
 ```powershell
 Get-Help Get-ChildItem
-Get-Help Get-ChildItem -Examples
+Get-Help ls              # PowerShell 中的 `ls` 是 `Get-ChildItem` 的别名
+Get-Help Set-Location
+Get-Help cd              # PowerShell 中的 `cd` 是 `Set-Location` 的别名
 ```
 
-查询版本时常见的形式有：
+### 版本信息
 
-```text
-tool --version
-tool -V
-tool -v
-```
-
-这些写法都只是探查顺序，不是保证。`-v` 也经常表示“输出更多过程信息”，`help` 可能是子命令，也可能被当作普通文件名。程序报告“未知选项”后，应停止猜测并查阅它的官方文档。
-
-::: tip 先判断失败发生在哪一层
-
-- Shell 报“无法识别”或“command not found”：通常还没有找到并启动程序。
-- 程序报“unknown option”：程序已经启动，但不接受该参数。
-- 程序报“missing argument”：选项可能存在，但缺少选项值或位置参数。
-  :::
-
-## 退出状态
-
-程序结束时会返回一个整数退出码。约定上 `0` 表示成功，非零表示失败；非零值的具体含义由程序定义，不能只凭数字猜测原因。
-
-PowerShell 的两个状态变量含义不同：
-
-- `$?` 表示上一条命令是否成功，是布尔值；
-- `$LASTEXITCODE` 保存最近一个原生程序或显式退出的 PowerShell 脚本返回的退出码。
-
-在 Windows PowerShell 中可用下面的命令观察原生程序返回的退出码：
-
-```powershell
-cmd.exe /c exit 0
-$?
-$LASTEXITCODE
-
-cmd.exe /c exit 7
-$?
-$LASTEXITCODE
-```
-
-预期两次 `$LASTEXITCODE` 分别为 `0` 和 `7`，第二次 `$?` 为 `False`。`cmd.exe` 在这里仅用于稳定地产生指定退出码，不要求学习它的命令语法。
-
-在 Bash、Zsh 等 POSIX Shell 中，`$?` 保存上一条命令的退出码：
+还有一个常见的需求是查询应用程序的版本。不同程序的写法也不统一，常见的形式有：
 
 ```sh
-command -v git
-echo $?
+# Git 的版本信息：
+git --version
+git -v
+git version        # 子命令形式也支持
+
+# Python 的版本号：
+python --version
+python -V          # 注意是大写
+
+# GCC、Clang、CMake 的版本信息：
+gcc --version
+clang --version
+cmake --version
 ```
 
-必须紧接着读取状态；运行下一条命令后，保存的就会是下一条命令的结果。
+有时候，小写的 `-v` 是 `--verbose` 的缩写，表示“详细输出”，而不是版本信息。
 
-## 练习：调查一个真实工具
+## 练习：调查真实工具
 
-选择本机已经安装的 `git`、`python`、`clang`、`cmake` 或其他工具，不要为了练习临时安装软件。
+依次调查以下命令：`git`、`g++`、`ninja`、`pip`、`code`、`calc`、`winget`、`wsl`.
 
-1. 用 `Get-Command <名称> -All` 确认它是别名、cmdlet 还是外部程序。
-2. 记录它的实际位置；如果存在多个候选项，说明默认选择哪一个。
-3. 尝试帮助和版本入口，记录哪些有效、哪些无效。
-4. 执行一条正常命令和一条带无效选项的命令，立即检查退出状态。
-5. 从官方文档确认一个选项的准确含义、适用版本和默认行为。
+1. 在你的环境中，它是否是合法命令？如果是，接着完成下列步骤。
+2. 确认它的类型，是别名、cmdlet 还是外部程序。如果是外部程序，确认它的路径和文件名。
+3. 确认它的版本信息。
+4. 尝试打开它的帮助文档，确认至少一个选项的用法和含义。
 
-完成的判据不是“命令运行过”，而是你能区分哪些结论来自实际输出，哪些只是尚待文档确认的猜测。
+## 拓展资料
 
-## 资料与检索词
-
-- [PowerShell 命令优先级](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_command_precedence)：确认同名命令的选择规则。
 - [PowerShell 引号规则](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_quoting_rules)：处理变量、空格和复杂参数时查阅。
-- [PowerShell 自动变量](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_automatic_variables)：查阅 `$?` 和 `$LASTEXITCODE` 的准确语义。
-- 检索：`<工具名> command line reference official`、`<工具名> exit codes official`。
