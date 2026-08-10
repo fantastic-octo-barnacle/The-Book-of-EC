@@ -56,7 +56,7 @@ export const nodes = defineNodes({
     technologies: ["Windows", "Linux", "PowerShell", "shell"],
     relations: [],
     parts: [
-      { title: "命令行基础", path: "index.md" },
+      { title: "Introduction", path: "index.md" },
       { title: "命令、参数与工具探查", path: "commands.md" },
       { title: "目录、路径与文件操作", path: "filesystem.md" },
       { title: "环境变量、PATH 与命令运行", path: "environment.md" }
