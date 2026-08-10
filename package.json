@@ -3,6 +3,8 @@
   "devDependencies": {
     "@types/cytoscape-dagre": "^2.3.4",
     "@types/node": "^24.13.3",
+    "oxfmt": "0.62.0",
+    "oxlint": "1.77.0",
     "playwright": "1.55.0",
     "typescript": "^5.9.3",
     "vite": "8.2.1",
@@ -12,7 +14,12 @@
   },
   "scripts": {
     "dev": "vitepress dev src",
+    "fmt": "oxfmt .",
+    "fmt:check": "oxfmt --check .",
+    "lint": "oxlint src/.vitepress --deny-warnings",
+    "lint:fix": "oxlint src/.vitepress --fix",
     "typecheck": "vue-tsc --noEmit",
+    "check": "pnpm run fmt:check && pnpm run lint && pnpm run typecheck",
     "build": "pnpm run typecheck && vitepress build src",
     "preview": "vitepress preview src"
   },

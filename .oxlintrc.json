@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "vue", "import", "node", "oxc", "unicorn"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+  },
+  "rules": {
+    "import/no-unassigned-import": "off",
+    "unicorn/no-array-sort": "off"
+  },
+  "ignorePatterns": ["src/.vitepress/cache/**", "src/.vitepress/dist/**"]
+}
