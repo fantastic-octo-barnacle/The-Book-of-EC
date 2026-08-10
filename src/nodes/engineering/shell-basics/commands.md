@@ -46,7 +46,9 @@ git -v
 # 查看 CMake 帮助：
 cmake --help
 cmake -h
+```
 
+```bash
 # 列出所有文件（包括隐藏文件）：
 ls --all
 ls -a
