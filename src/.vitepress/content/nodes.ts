@@ -27,13 +27,17 @@ function defineNodes<const Registry extends Record<string, NodeShape<keyof Regis
 export const nodes = defineNodes({
   "engineering.shell-basics": {
     title: "命令行基础",
-    summary: "文件、进程、退出码与标准流。",
+    summary: "命令结构、文件导航、工具解析与运行环境。",
     level: "intro",
-    estimatedTime: "2h",
-    concepts: ["shell", "process", "standard-stream"],
-    technologies: ["Linux", "shell"],
+    estimatedTime: "3h",
+    concepts: ["shell", "process", "filesystem", "environment-variable"],
+    technologies: ["Windows", "Linux", "PowerShell", "shell"],
     relations: [],
-    parts: []
+    parts: [
+      { title: "命令、参数与工具探查", path: "commands" },
+      { title: "目录、路径与文件操作", path: "filesystem" },
+      { title: "环境变量、PATH 与命令运行", path: "environment" }
+    ]
   },
   "engineering.git-model": {
     title: "Git 状态模型",

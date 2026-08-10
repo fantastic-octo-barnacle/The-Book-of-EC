@@ -1,5 +1,6 @@
 ---
 title: 通信
+pageClass: graph-page
 prev: false
 next: false
 ---

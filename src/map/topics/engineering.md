@@ -1,5 +1,6 @@
 ---
 title: 工程与协作
+pageClass: graph-page
 prev: false
 next: false
 ---

@@ -19,7 +19,9 @@ export const concepts = [
   "debugging",
   "DMA",
   "driver",
+  "environment-variable",
   "feedback",
+  "filesystem",
   "frame",
   "GPIO",
   "interrupt",
@@ -65,11 +67,13 @@ export const technologies = [
   "Linux",
   "MCU",
   "motor",
+  "PowerShell",
   "RoboMaster",
   "shell",
   "SPI",
   "STM32",
-  "UART"
+  "UART",
+  "Windows"
 ] as const
 
 export type Technology = (typeof technologies)[number]

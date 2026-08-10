@@ -1,5 +1,6 @@
 ---
 title: RoboMaster 实践
+pageClass: graph-page
 prev: false
 next: false
 ---

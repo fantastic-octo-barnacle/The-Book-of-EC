@@ -1,5 +1,6 @@
 ---
 title: 学习图
+pageClass: graph-page
 prev: false
 next: false
 ---

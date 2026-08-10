@@ -1,5 +1,6 @@
 ---
 title: C/C++ 与程序运行
+pageClass: graph-page
 prev: false
 next: false
 ---

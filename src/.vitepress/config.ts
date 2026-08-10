@@ -9,6 +9,13 @@ export default defineConfig({
   lang: "zh-CN",
   title: "The Book of EC",
   description: "面向 RoboMaster 新成员的嵌入式电控学习导航",
+  head: [
+    [
+      "script",
+      {},
+      `try{if(sessionStorage.getItem("the-book-of-ec:sidebar-collapsed")==="true")document.documentElement.classList.add("vp-sidebar-collapsed")}catch{}`
+    ]
+  ],
   vite: {
     plugins: [learningGraphPlugin(source)]
   },

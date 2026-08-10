@@ -27,7 +27,7 @@ features:
 不必先规划完整路线。选择与你当前任务最近的入口，再沿图补齐先修知识。
 
 <div class="capability-map">
-  <a href="/nodes/engineering/shell-basics/"><strong>我要开始修改工程</strong><span>从文件、进程、退出码和标准流开始。</span></a>
+  <a href="/nodes/engineering/shell-basics/"><strong>我要开始修改工程</strong><span>从命令、路径、工具查找和运行环境开始。</span></a>
   <a href="/nodes/embedded/circuit-basics/"><strong>我要开始接触硬件</strong><span>从供电、参考地和逻辑电平开始。</span></a>
   <a href="/nodes/control/sampling-model/"><strong>我要理解控制系统</strong><span>从对象、单位、状态和采样周期开始。</span></a>
 </div>

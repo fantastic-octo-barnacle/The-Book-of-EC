@@ -1,5 +1,6 @@
 ---
 title: 电子与嵌入式
+pageClass: graph-page
 prev: false
 next: false
 ---

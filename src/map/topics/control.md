@@ -1,5 +1,6 @@
 ---
 title: 控制与机器人
+pageClass: graph-page
 prev: false
 next: false
 ---
