@@ -138,9 +138,9 @@ Get-Command where
 在 Bash、Zsh 等 POSIX Shell 中，则可以使用：
 
 ```bash
-which ls
-which git
-which where
+type ls
+type git
+type where
 ```
 
 不同 Shell 的解析顺序并不完全相同。可靠的结论应来自当前会话的查询结果，而不是“我记得这个名字一般是什么”。
@@ -206,7 +206,7 @@ cmake --version
 
 有时候，小写的 `-v` 是 `--verbose` 的缩写，表示“详细输出”，而不是版本信息。
 
-## 练习：调查真实工具
+## 【练习】调查真实工具
 
 依次调查以下命令：`git`、`g++`、`ninja`、`pip`、`code`、`calc`、`winget`、`wsl`.
 
@@ -215,6 +215,6 @@ cmake --version
 3. 确认它的版本信息。
 4. 尝试打开它的帮助文档，确认至少一个选项的用法和含义。
 
-## 拓展资料
+## 【拓展】
 
 - [PowerShell 引号规则](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_quoting_rules)：处理变量、空格和复杂参数时查阅。
