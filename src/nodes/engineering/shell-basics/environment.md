@@ -113,3 +113,4 @@ git status
 1. 一个进程在什么实际会加载环境变量？这给你带来什么启示？
 2. 在 Windows PowerShell 中，`where git` 和 `where.exe git` 为什么结果不同？
 3. 如果你的电脑上有几个不同的 Python 项目，分别需要 Python 3.8、3.10 和 3.13，你该怎么办？根据本节知识，提出两种可行方案。
+4. VS Code 提供了命令行工具 `code` 命令。想办法让 `code` 命令在你的 Shell 中正常可用。
