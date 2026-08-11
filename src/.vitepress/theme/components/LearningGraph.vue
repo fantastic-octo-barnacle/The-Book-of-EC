@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { withBase } from "vitepress"
+import { VPLink } from "vitepress/theme"
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import type { Core, ElementDefinition } from "cytoscape"
 import type { DagreLayoutOptions } from "cytoscape-dagre"
@@ -132,7 +134,7 @@ function resetFilters() {
 function focusNode(id: string) {
   if (topic.value && !visibleIds.value.has(id)) {
     const node = byId.get(id)
-    if (node) window.location.assign(node.route)
+    if (node) window.location.assign(withBase(node.route))
     return
   }
   if (!visibleIds.value.has(id)) resetFilters()
@@ -480,7 +482,7 @@ onBeforeUnmount(() => {
             </ul>
           </section>
         </div>
-        <a class="node-entry" :href="selected.route">进入节点</a>
+        <VPLink class="node-entry" :href="selected.route">进入节点</VPLink>
       </div>
     </aside>
   </section>

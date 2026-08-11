@@ -27,9 +27,9 @@ features:
 不必先规划完整路线。选择与你当前任务最近的入口，再沿图补齐先修知识。
 
 <div class="capability-map">
-  <a href="/nodes/engineering/shell-basics/"><strong>我要开始修改工程</strong><span>从命令、路径、工具查找和运行环境开始。</span></a>
-  <a href="/nodes/embedded/circuit-basics/"><strong>我要开始接触硬件</strong><span>从供电、参考地和逻辑电平开始。</span></a>
-  <a href="/nodes/control/sampling-model/"><strong>我要理解控制系统</strong><span>从对象、单位、状态和采样周期开始。</span></a>
+  <VPLink href="/nodes/engineering/shell-basics/"><strong>我要开始修改工程</strong><span>从命令、路径、工具查找和运行环境开始。</span></VPLink>
+  <VPLink href="/nodes/embedded/circuit-basics/"><strong>我要开始接触硬件</strong><span>从供电、参考地和逻辑电平开始。</span></VPLink>
+  <VPLink href="/nodes/control/sampling-model/"><strong>我要理解控制系统</strong><span>从对象、单位、状态和采样周期开始。</span></VPLink>
 </div>
 
 ## 学习图
@@ -41,12 +41,12 @@ features:
 ## 按专题浏览
 
 <div class="capability-map">
-  <a href="/map/topics/engineering"><strong>工程与协作</strong><span>命令行、版本管理和调试。</span></a>
-  <a href="/map/topics/programming"><strong>C/C++ 与程序运行</strong><span>构建、对象、指针与资源管理。</span></a>
-  <a href="/map/topics/embedded"><strong>电子与嵌入式</strong><span>板级约束、外设与并发。</span></a>
-  <a href="/map/topics/communication"><strong>通信</strong><span>串行总线、帧与协议。</span></a>
-  <a href="/map/topics/control"><strong>控制与机器人</strong><span>采样、反馈、PID 与估计。</span></a>
-  <a href="/map/topics/robotics"><strong>RoboMaster 实践</strong><span>板级启动与系统联调。</span></a>
+  <VPLink href="/map/topics/engineering"><strong>工程与协作</strong><span>命令行、版本管理和调试。</span></VPLink>
+  <VPLink href="/map/topics/programming"><strong>C/C++ 与程序运行</strong><span>构建、对象、指针与资源管理。</span></VPLink>
+  <VPLink href="/map/topics/embedded"><strong>电子与嵌入式</strong><span>板级约束、外设与并发。</span></VPLink>
+  <VPLink href="/map/topics/communication"><strong>通信</strong><span>串行总线、帧与协议。</span></VPLink>
+  <VPLink href="/map/topics/control"><strong>控制与机器人</strong><span>采样、反馈、PID 与估计。</span></VPLink>
+  <VPLink href="/map/topics/robotics"><strong>RoboMaster 实践</strong><span>板级启动与系统联调。</span></VPLink>
 </div>
 
 ## 从问题进入

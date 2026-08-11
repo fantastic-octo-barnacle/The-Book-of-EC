@@ -1,4 +1,4 @@
-import DefaultTheme from "vitepress/theme"
+import DefaultTheme, { VPLink } from "vitepress/theme"
 import { h } from "vue"
 import "./custom.css"
 import GitDiagram from "./components/GitDiagram.vue"
@@ -12,9 +12,10 @@ export default {
     h(DefaultTheme.Layout, null, {
       "layout-bottom": () => h(SidebarToggle)
     }),
-  /** 注册可在 Markdown 中直接使用的学习图组件。 */
+  /** 注册可在 Markdown 中直接使用的主题组件。 */
   enhanceApp({ app }: { app: { component: (name: string, component: unknown) => void } }) {
     app.component("GitDiagram", GitDiagram)
     app.component("LearningGraph", LearningGraph)
+    app.component("VPLink", VPLink)
   }
 }
