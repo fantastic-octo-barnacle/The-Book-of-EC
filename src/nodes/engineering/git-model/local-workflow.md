@@ -34,9 +34,9 @@ git diff --staged
 
 `git diff` 与 `git diff --staged` 回答不同问题：
 
-| 命令                | 比较的内容       |
-| ------------------- | ---------------- |
-| `git diff`          | 工作区与暂存区   |
+| 命令                | 比较的内容                 |
+| ------------------- | -------------------------- |
+| `git diff`          | 工作区与暂存区             |
 | `git diff --staged` | 暂存区与当前提交（`HEAD`） |
 
 <GitDiagram kind="snapshots" />
