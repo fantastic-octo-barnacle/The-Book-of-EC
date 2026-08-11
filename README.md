@@ -33,6 +33,10 @@ pnpm dev
 
 新增学习节点时，在 `src/nodes/<domain>/<slug>/` 创建 Markdown 页面和 `meta.ts`，再将 ID 及静态导入加入 `src/.vitepress/content/nodes.ts`。`parts` 必须按阅读顺序列出全部页面，首项为入口页；加入专题则更新 `topics.ts`。完整规则见[维护本书](src/contributing/index.md)。
 
+## 持续集成与发布
+
+每次向分支 push 时，GitHub Actions 都会运行格式、lint、类型和构建检查。匹配 `v*.*.*` 的 tag push 也会触发检查，但 tag 必须严格符合 `v<MAJOR>.<MINOR>.<PATCH>`（例如 `v1.2.3`），否则 workflow 会失败；合法 tag 会在检查通过后部署 GitHub Pages。
+
 ## 架构
 
 ```text

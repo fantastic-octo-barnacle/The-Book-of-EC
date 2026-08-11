@@ -5,8 +5,10 @@ import { createSidebar } from "./content/navigation.ts"
 
 // 内容插件以 src 目录为根解析节点文件。
 const source = fileURLToPath(new URL("..", import.meta.url))
+const pagesBasePath = process.env.VITEPRESS_BASE_PATH?.replace(/\/$/, "")
 
 export default defineConfig({
+  base: pagesBasePath ? `${pagesBasePath}/` : "/",
   lang: "zh-CN",
   title: "The Book of EC",
   description: "面向 RoboMaster 新成员的嵌入式电控学习导航",

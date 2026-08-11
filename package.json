@@ -30,5 +30,6 @@
     "vitepress": "2.0.0-alpha.19",
     "vue": "3.5.41",
     "vue-tsc": "^3.3.9"
-  }
+  },
+  "packageManager": "pnpm@11.21.0"
 }
