@@ -3,16 +3,17 @@ import type { NodeDefinition } from "#content/nodes.ts"
 export default {
   id: "engineering.git-model",
   title: "Git 基础",
-  summary: "观察、暂存、提交、分支与远程同步。",
+  summary: "版本管理、仓库、commit 与分支基础。",
   level: "intro",
-  estimatedTime: "3h",
+  estimatedTime: "2h",
   concepts: ["version-control"],
   technologies: ["Git"],
   relations: [{ target: "engineering.shell-basics", type: "recommended" }],
   parts: [
-    { title: "Git 基础", path: "index.md" },
-    { title: "观察、暂存与提交", path: "local-workflow.md" },
-    { title: "分支、stash 与远程", path: "branches-remotes.md" },
-    { title: "综合练习", path: "practice.md" }
+    { title: "Introduction", path: "intro.md" },
+    { title: "首次 Git 配置", path: "setup.md" },
+    { title: "创建仓库", path: "repositories.md" },
+    { title: "创建 commit", path: "commits.md" },
+    { title: "分支", path: "branches.md" }
   ]
 } satisfies NodeDefinition
