@@ -10,7 +10,7 @@ export default {
   technologies: ["Windows", "Linux", "PowerShell", "shell"],
   relations: [],
   parts: [
-    { title: "Introduction", path: "index.md" },
+    { title: "Introduction", path: "intro.md" },
     { title: "命令、参数与工具探查", path: "commands.md" },
     { title: "目录、路径与文件操作", path: "filesystem.md" },
     { title: "环境变量、PATH 与命令运行", path: "environment.md" }
