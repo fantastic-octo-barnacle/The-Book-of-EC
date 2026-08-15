@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type DiagramKind = "areas" | "snapshots" | "branches"
+type DiagramKind = "uses" | "areas" | "snapshots" | "branches"
 
 const props = defineProps<{
   /** 要展示的 Git 概念图。 */
@@ -9,7 +9,63 @@ const props = defineProps<{
 
 <template>
   <figure class="git-diagram">
-    <div v-if="props.kind === 'areas'" class="areas" aria-hidden="true">
+    <div v-if="props.kind === 'uses'" class="uses-grid">
+      <article class="use-card">
+        <strong>保存多个版本</strong>
+        <div class="version-history" aria-hidden="true">
+          <div class="history-point"><span>C0</span></div>
+          <span class="history-line"></span>
+          <div class="history-point"><span>C1</span></div>
+          <span class="history-line"></span>
+          <div class="history-point active"><span>C2</span></div>
+        </div>
+        <p>每个 commit 保存一个版本，旧版本仍留在历史中。</p>
+      </article>
+
+      <article class="use-card">
+        <strong>commit 附加消息</strong>
+        <div class="message-visual" aria-hidden="true">
+          <code>8f3a21c</code>
+          <span>修正电机转向</span>
+        </div>
+        <p>消息说明这个版本完成了什么修改。</p>
+      </article>
+
+      <article class="use-card">
+        <strong>签出某个版本</strong>
+        <div class="checkout-visual" aria-hidden="true">
+          <div class="checkout-history">
+            <span>C0</span>
+            <span class="selected-version">C1</span>
+            <span>C2</span>
+          </div>
+          <span class="checkout-arrow">↓</span>
+          <div class="working-files">工作区：C1</div>
+        </div>
+        <p>工作区可以呈现任一已保存版本，其他版本不会被删除。</p>
+      </article>
+
+      <article class="use-card">
+        <strong>分支并行开发</strong>
+        <div class="team-visual" aria-hidden="true">
+          <svg viewBox="0 0 300 120" role="presentation">
+            <path class="team-line shared-line" d="M20 60 H95" />
+            <path class="team-line chassis-line" d="M95 60 L145 25 H275" />
+            <path class="team-line gimbal-line" d="M95 60 L145 95 H275" />
+            <circle class="team-commit shared-team-commit" cx="55" cy="60" r="8" />
+            <circle class="team-commit chassis-commit" cx="170" cy="25" r="8" />
+            <circle class="team-commit chassis-commit" cx="220" cy="25" r="8" />
+            <circle class="team-commit gimbal-commit" cx="170" cy="95" r="8" />
+            <circle class="team-commit gimbal-commit" cx="220" cy="95" r="8" />
+            <text x="150" y="15">Alice：底盘</text>
+            <text x="150" y="116">Bob：云台</text>
+          </svg>
+        </div>
+        <p>不同成员在各自分支工作，完成后再合并修改。</p>
+      </article>
+    </div>
+
+    <div v-else-if="props.kind === 'areas'" class="areas" aria-hidden="true">
       <div class="diagram-box worktree">
         <span class="box-kicker">你正在编辑</span>
         <strong>工作区</strong>
@@ -97,7 +153,7 @@ const props = defineProps<{
     <figcaption v-else-if="props.kind === 'snapshots'">
       同一个文件可以同时有三个不同版本；暂存后继续编辑，只会改变工作区版本。
     </figcaption>
-    <figcaption v-else>
+    <figcaption v-else-if="props.kind === 'branches'">
       两条工作线可以从同一个版本继续产生不同的 commit，之后再按需要合并。
     </figcaption>
   </figure>
@@ -125,6 +181,167 @@ const props = defineProps<{
   font-size: 0.9rem;
   line-height: 1.6;
   text-align: center;
+}
+
+.uses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.use-card {
+  display: grid;
+  min-width: 0;
+  min-height: 220px;
+  padding: 1.1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg);
+  box-shadow: var(--vp-shadow-1);
+}
+
+.use-card > strong {
+  font-size: 1.05rem;
+}
+
+.use-card > p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.version-history,
+.checkout-visual,
+.message-visual,
+.team-visual {
+  align-self: center;
+}
+
+.version-history {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.history-point {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--vp-c-text-3);
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  place-items: center;
+}
+
+.history-point.active {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.history-line {
+  width: clamp(24px, 7vw, 64px);
+  height: 3px;
+  background: var(--vp-c-text-3);
+}
+
+.message-visual {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-left: 4px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.message-visual code {
+  color: var(--vp-c-brand-1);
+  font-weight: 700;
+}
+
+.checkout-visual {
+  display: grid;
+  justify-items: center;
+}
+
+.checkout-history {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.checkout-history > span {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  background: var(--vp-c-bg-soft);
+}
+
+.checkout-history .selected-version {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  font-weight: 700;
+}
+
+.checkout-arrow {
+  color: var(--vp-c-brand-1);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.working-files {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  background: var(--vp-c-brand-soft);
+}
+
+.team-visual svg {
+  display: block;
+  width: 100%;
+  height: 105px;
+}
+
+.team-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.shared-line {
+  stroke: var(--vp-c-text-3);
+}
+
+.chassis-line {
+  stroke: var(--vp-c-brand-1);
+}
+
+.gimbal-line {
+  stroke: var(--vp-c-indigo-1);
+}
+
+.team-commit {
+  fill: var(--vp-c-bg);
+  stroke-width: 4;
+}
+
+.shared-team-commit {
+  stroke: var(--vp-c-text-3);
+}
+
+.chassis-commit {
+  stroke: var(--vp-c-brand-1);
+}
+
+.gimbal-commit {
+  stroke: var(--vp-c-indigo-1);
+}
+
+.team-visual text {
+  fill: var(--vp-c-text-1);
+  font: 600 13px var(--vp-font-family-base);
 }
 
 .areas,
@@ -301,6 +518,14 @@ const props = defineProps<{
     flex-direction: column;
     min-width: 0;
     gap: 0.8rem;
+  }
+
+  .uses-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .use-card {
+    min-height: 205px;
   }
 
   .diagram-box,
