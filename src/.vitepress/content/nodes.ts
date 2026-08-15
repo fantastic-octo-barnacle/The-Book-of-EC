@@ -12,7 +12,7 @@ import embeddedInterrupts from "#nodes/embedded/interrupts/meta.ts"
 import embeddedRtos from "#nodes/embedded/rtos/meta.ts"
 import embeddedTimersDma from "#nodes/embedded/timers-dma/meta.ts"
 import engineeringDebugging from "#nodes/engineering/debugging/meta.ts"
-import engineeringGitModel from "#nodes/engineering/git-model/meta.ts"
+import engineeringGitBasics from "#nodes/engineering/git-basics/meta.ts"
 import engineeringShellBasics from "#nodes/engineering/shell-basics/meta.ts"
 import programmingCppResource from "#nodes/programming/cpp-resource/meta.ts"
 import programmingObjectLifetime from "#nodes/programming/object-lifetime/meta.ts"
@@ -25,7 +25,7 @@ import type { Concept, Level, Technology } from "./taxonomy.ts"
 /** 全部合法节点 ID。 */
 export const nodeIds = [
   "engineering.shell-basics",
-  "engineering.git-model",
+  "engineering.git-basics",
   "engineering.debugging",
   "programming.translation-linking",
   "programming.object-lifetime",
@@ -95,7 +95,7 @@ export type NodeDefinition = {
 /** 由各节点目录中的元数据组成的中央注册表。 */
 export const nodes = {
   [engineeringShellBasics.id]: engineeringShellBasics,
-  [engineeringGitModel.id]: engineeringGitModel,
+  [engineeringGitBasics.id]: engineeringGitBasics,
   [engineeringDebugging.id]: engineeringDebugging,
   [programmingTranslationLinking.id]: programmingTranslationLinking,
   [programmingObjectLifetime.id]: programmingObjectLifetime,

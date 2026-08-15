@@ -1,7 +1,7 @@
 import type { NodeDefinition } from "#content/nodes.ts"
 
 export default {
-  id: "engineering.git-model",
+  id: "engineering.git-basics",
   title: "Git 基础",
   summary: "版本管理、仓库、commit 与分支基础。",
   level: "intro",
