@@ -61,6 +61,8 @@ git status
 
 # 查看仓库历史记录
 git log --graph --all --oneline
+
+# 结束后，把整个 `./calculator` 目录删除即可
 ```
 
 `git clone` 会创建项目目录，复制已有版本记录，并完成仓库初始化。

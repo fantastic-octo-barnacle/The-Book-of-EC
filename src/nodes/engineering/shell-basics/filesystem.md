@@ -47,7 +47,7 @@ pwd
 
 Windows 和 macOS 上常见的文件系统通常不区分文件名大小写，Linux 上通常区分；实际行为还会受到文件系统和挂载配置影响。跨平台工程应始终按文件名的准确大小写书写路径。
 
-“隐藏”也不是统一规则。Windows 文件可以带有隐藏属性，Linux/macOS 工具通常把名称以 `.` 开头的项目视为隐藏。`ls` 的默认输出没有显示某个文件，不等于文件不存在。
+“隐藏”也不是统一规则。Windows 文件可以带有隐藏属性，Linux/macOS 工具通常把名称以 `.` 开头的项目视为隐藏。`ls` 的默认输出没有显示某个文件，不等于文件不存在。使用 `ls -a` 可以显示所有文件，包括隐藏文件（`-a` 是 `--all` 的简写）。
 
 ## 练习：只在新目录中操作
 
@@ -65,16 +65,19 @@ ls                         # 列出当前目录内容（list）（此时为空�
 
 创建一个带空格的目录和一个空文件：
 
-- Windows PowerShell：
-  ```powershell
-  mkdir "space dir"
-  New-Item note.txt -ItemType File
-  ```
-- Linux/macOS：
-  ```sh
-  mkdir "space dir"
-  touch note.txt
-  ```
+::: code-group
+
+```powershell [PowerShell]
+mkdir "space dir"
+New-Item note.txt -ItemType File
+```
+
+```bash [Bash/Zsh]
+mkdir "space dir"
+touch note.txt
+```
+
+:::
 
 此时列出当前目录内容应该包含 `note.txt` 和 `space dir`：
 
@@ -103,14 +106,17 @@ cd ..
 pwd       # 现在应当回到了用户主目录
 ```
 
-- Windows PowerShell：
-  ```powershell
-  rm -Recurse command-line-lab
-  ```
-- Linux/macOS：
-  ```bash
-  rm -r command-line-lab    # 递归地（recursively）删除目录及其中所有内容
-  ```
+::: code-group
+
+```powershell [PowerShell]
+rm -Recurse command-line-lab
+```
+
+```bash [Bash/Zsh]
+rm -r command-line-lab    # 递归地（recursively）删除目录及其中所有内容
+```
+
+:::
 
 :::tip
 PowerShell 中 `mkdir`、`cp`、`mv`、`rm` 等都只是别名（Alias），实际调用的是 `New-Item`、`Copy-Item`、`Move-Item`、`Remove-Item` 等内置函数。它们的行为与 POSIX Shell 中的同名工具不完全相同。

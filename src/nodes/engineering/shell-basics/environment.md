@@ -6,43 +6,43 @@
 
 环境变量是字符串键值。程序用它们接收与运行环境有关的信息，例如工具搜索路径、语言区域或临时目录。
 
-- Windows PowerShell：
+::: code-group
 
-  ```powershell
-  # 列出所有环境变量
-  Get-ChildItem Env:
+```powershell [PowerShell]
+# 列出所有环境变量
+Get-ChildItem Env:
 
-  # 读取单个环境变量
-  $env:USERNAME         # 当前用户名
-  $env:TEMP             # 系统用的临时目录
-  ```
+# 读取单个环境变量
+$env:USERNAME         # 当前用户名
+$env:TEMP             # 系统用的临时目录
+```
 
-- Bash、Zsh：
+```bash [Bash/Zsh]
+# 列出所有环境变量
+env
 
-  ```bash
-  # 列出所有环境变量
-  env
+# 读取单个环境变量
+echo "$USER"          # 当前用户名
+echo "$TMPDIR"        # 系统用的临时目录
+```
 
-  # 读取单个环境变量
-  echo "$USER"          # 当前用户名
-  echo "$TMPDIR"        # 系统用的临时目录
-  ```
+:::
 
 ## `PATH` 是有顺序的目录列表
 
 `PATH` 是一个有特殊作用的环境变量，它保存了一组目录。输入外部程序名而没有提供路径时，Shell 会用它查找程序；顺序靠前的同名程序可能遮蔽后面的版本。
 
-- Windows PowerShell：
+::: code-group
 
-  ```powershell
-  $env:PATH -split [IO.Path]::PathSeparator
-  ```
+```powershell [PowerShell]
+$env:PATH -split [IO.Path]::PathSeparator
+```
 
-- Bash、Zsh：
+```bash [Bash/Zsh]
+echo "$PATH" | tr ':' '\n'
+```
 
-  ```bash
-  echo "$PATH" | tr ':' '\n'
-  ```
+:::
 
 Windows 通常用分号分隔各项，Linux 和 macOS 通常用冒号。以上的命令将每一项分行输出，便于观察。
 
@@ -75,27 +75,33 @@ git status
 
 以下方法可用于查找当前 Shell 实际会运行的 `git` 是哪个命令：
 
-- Windows PowerShell：
-  ```powershell
-  Get-Command git
-  ```
-- Bash、Zsh：
-  ```bash
-  which git
-  ```
+::: code-group
+
+```powershell [PowerShell]
+Get-Command git
+```
+
+```bash [Bash/Zsh]
+which git
+```
+
+:::
 
 以下方式则可以列出所有可以检索到的同名候选项（包括因为优先级较低而被遮蔽的，比如在 `PATH` 中靠后的版本）：
 
-- Windows PowerShell：
-  ```powershell
-  where.exe git           # 不能用于别名、函数和 cmdlet
-  Get-Command git -All    # 还会显示类型
-  ```
-- Bash、Zsh：
-  ```bash
-  where git               # 只列出路径
-  type -a git             # 还会显示类型
-  ```
+::: code-group
+
+```powershell [PowerShell]
+where.exe git           # 不能用于别名、函数和 cmdlet
+Get-Command git -All    # 还会显示类型
+```
+
+```bash [Bash/Zsh]
+where git               # 只列出路径
+type -a git             # 还会显示类型
+```
+
+:::
 
 ## 【自主学习】添加 `PATH`
 
