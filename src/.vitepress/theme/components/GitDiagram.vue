@@ -69,7 +69,7 @@ const props = defineProps<{
       <div class="diagram-box worktree">
         <span class="box-kicker">你正在编辑</span>
         <strong>工作区</strong>
-        <code>main.c</code>
+        <span class="box-kicker">Working Directory</span>
       </div>
       <div class="diagram-arrow">
         <code>git add</code>
@@ -78,7 +78,7 @@ const props = defineProps<{
       <div class="diagram-box index">
         <span class="box-kicker">下一次 commit 的内容</span>
         <strong>暂存区</strong>
-        <code>main.c</code>
+        <span class="box-kicker">Staging Area</span>
       </div>
       <div class="diagram-arrow">
         <code>git commit</code>
@@ -87,33 +87,36 @@ const props = defineProps<{
       <div class="diagram-box repository">
         <span class="box-kicker">已经保存的版本</span>
         <strong>本地仓库</strong>
-        <code>C0 → C1</code>
+        <span class="box-kicker">Local Repository</span>
       </div>
     </div>
 
     <div v-else-if="props.kind === 'snapshots'" class="versions" aria-hidden="true">
       <div class="version-column">
         <span>工作区</span>
-        <div class="file-card muted-file">
-          <strong>info.c</strong>
+        <div class="file-card changed-file">
+          <strong>main.c</strong>
           <code>version = 3</code>
         </div>
+        <span>Working Directory</span>
       </div>
       <div class="version-arrow">→</div>
       <div class="version-column">
         <span>暂存区</span>
         <div class="file-card staged-file">
-          <strong>info.c</strong>
+          <strong>main.c</strong>
           <code>version = 2</code>
         </div>
+        <span>Staging Area</span>
       </div>
       <div class="version-arrow">→</div>
       <div class="version-column">
-        <span>本地仓库</span>
-        <div class="file-card changed-file">
-          <strong>info.c</strong>
+        <span>仓库</span>
+        <div class="file-card muted-file">
+          <strong>main.c</strong>
           <code>version = 1</code>
         </div>
+        <span>Repository</span>
       </div>
     </div>
 
@@ -151,7 +154,7 @@ const props = defineProps<{
       <code>git commit</code> 保存到本地仓库。
     </figcaption>
     <figcaption v-else-if="props.kind === 'snapshots'">
-      同一个文件可以同时有三个不同版本；暂存后继续编辑，只会改变工作区版本。
+      同一个文件 <code>main.c</code> 可以同时有三个不同版本；暂存后继续编辑，只会改变工作区版本。
     </figcaption>
     <figcaption v-else-if="props.kind === 'branches'">
       两条工作线可以从同一个版本继续产生不同的 commit，之后再按需要合并。
@@ -200,11 +203,11 @@ const props = defineProps<{
   box-shadow: var(--vp-shadow-1);
 }
 
-.use-card > strong {
+.use-card>strong {
   font-size: 1.05rem;
 }
 
-.use-card > p {
+.use-card>p {
   margin: 0;
   color: var(--vp-c-text-2);
   font-size: 0.9rem;
@@ -271,7 +274,7 @@ const props = defineProps<{
   gap: 0.55rem;
 }
 
-.checkout-history > span {
+.checkout-history>span {
   padding: 0.35rem 0.7rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 999px;
@@ -380,7 +383,7 @@ const props = defineProps<{
 }
 
 .box-kicker,
-.version-column > span {
+.version-column>span {
   color: var(--vp-c-text-2);
   font-size: 0.78rem;
 }
