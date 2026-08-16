@@ -24,7 +24,12 @@ const selectedId = ref<string | null>(null)
 const isExpanded = ref(false)
 const normalMinZoom = 0.58
 const expandedMinZoom = 0.25
+const trackpadDeltaThreshold = 50
+const wheelGestureResetDelay = 120
 let cy: Core | undefined
+let wheelCanvas: HTMLDivElement | undefined
+let wheelSource: "mouse" | "trackpad" | undefined
+let wheelGestureResetTimer: ReturnType<typeof setTimeout> | undefined
 
 const levelLabels: Record<string, string> = {
   intro: "入门",
@@ -128,6 +133,42 @@ function resetFilters() {
   selectedLevels.value = []
   selectedConcepts.value = []
   selectedTechnologies.value = []
+}
+
+/** 打开节点入口页。 */
+function openNode(id: string) {
+  const node = byId.get(id)
+  if (node) window.location.assign(withBase(node.route))
+}
+
+/**
+ * 浏览器不直接暴露滚轮来源；像素级、小幅或横向滚动通常来自触控板。
+ * 同一手势期间锁定判断，避免惯性滚动在平移与缩放之间切换。
+ */
+function isTrackpadWheel(event: WheelEvent) {
+  if (wheelGestureResetTimer) clearTimeout(wheelGestureResetTimer)
+  wheelGestureResetTimer = setTimeout(() => {
+    wheelSource = undefined
+  }, wheelGestureResetDelay)
+
+  if (!wheelSource) {
+    const magnitude = Math.max(Math.abs(event.deltaX), Math.abs(event.deltaY))
+    const hasFractionalDelta = !Number.isInteger(event.deltaX) || !Number.isInteger(event.deltaY)
+    wheelSource =
+      event.deltaMode === WheelEvent.DOM_DELTA_PIXEL &&
+      (event.deltaX !== 0 || hasFractionalDelta || magnitude < trackpadDeltaThreshold)
+        ? "trackpad"
+        : "mouse"
+  }
+  return wheelSource === "trackpad"
+}
+
+/** 双指滑动平移画布；捏合与鼠标滚轮继续交给 Cytoscape 缩放。 */
+function handleCanvasWheel(event: WheelEvent) {
+  if (event.ctrlKey || !isTrackpadWheel(event)) return
+  event.preventDefault()
+  event.stopImmediatePropagation()
+  cy?.panBy({ x: -event.deltaX, y: -event.deltaY })
 }
 
 /** 聚焦节点；专题外节点直接跳转到其详情页。 */
@@ -244,13 +285,16 @@ onMounted(async () => {
     import("cytoscape-dagre")
   ])
   if (!canvas.value) return
+  wheelCanvas = canvas.value
+  // 在 Cytoscape 注册监听器前捕获触控板滚动，避免同一手势同时平移和缩放。
+  wheelCanvas.addEventListener("wheel", handleCanvasWheel, { capture: true, passive: false })
   cytoscape.use(dagre)
   cy = cytoscape({
     container: canvas.value,
     elements: [],
     minZoom: normalMinZoom,
     maxZoom: 2.5,
-    wheelSensitivity: 1.35,
+    wheelSensitivity: 0.35,
     userZoomingEnabled: true,
     userPanningEnabled: true,
     boxSelectionEnabled: false,
@@ -327,6 +371,9 @@ onMounted(async () => {
   cy.on("tap", "node", (event) => {
     selectedId.value = event.target.id()
   })
+  cy.on("dbltap", "node", (event) => {
+    openNode(event.target.id())
+  })
   cy.on("tap", (event) => {
     if (event.target === cy) selectedId.value = null
   })
@@ -336,6 +383,8 @@ onMounted(async () => {
 watch(visibleNodes, renderGraph)
 watch(selectedId, applyHighlight)
 onBeforeUnmount(() => {
+  if (wheelGestureResetTimer) clearTimeout(wheelGestureResetTimer)
+  wheelCanvas?.removeEventListener("wheel", handleCanvasWheel, true)
   cy?.destroy()
 })
 </script>
