@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "cytoscape": "^3.34.0",
-    "cytoscape-dagre": "^4.0.0"
+    "cytoscape-dagre": "^4.0.0",
+    "motion-v": "^2.3.0"
   },
   "devDependencies": {
     "@types/cytoscape-dagre": "^2.3.4",

@@ -13,6 +13,7 @@ import embeddedRtos from "#nodes/embedded/rtos/meta.ts"
 import embeddedTimersDma from "#nodes/embedded/timers-dma/meta.ts"
 import engineeringDebugging from "#nodes/engineering/debugging/meta.ts"
 import engineeringGitBasics from "#nodes/engineering/git-basics/meta.ts"
+import engineeringGitRemote from "#nodes/engineering/git-remote/meta.ts"
 import engineeringShellBasics from "#nodes/engineering/shell-basics/meta.ts"
 import programmingCppResource from "#nodes/programming/cpp-resource/meta.ts"
 import programmingObjectLifetime from "#nodes/programming/object-lifetime/meta.ts"
@@ -26,6 +27,7 @@ import type { Concept, Level, Technology } from "./taxonomy.ts"
 export const nodeIds = [
   "engineering.shell-basics",
   "engineering.git-basics",
+  "engineering.git-remote",
   "engineering.debugging",
   "programming.translation-linking",
   "programming.object-lifetime",
@@ -96,6 +98,7 @@ export type NodeDefinition = {
 export const nodes = {
   [engineeringShellBasics.id]: engineeringShellBasics,
   [engineeringGitBasics.id]: engineeringGitBasics,
+  [engineeringGitRemote.id]: engineeringGitRemote,
   [engineeringDebugging.id]: engineeringDebugging,
   [programmingTranslationLinking.id]: programmingTranslationLinking,
   [programmingObjectLifetime.id]: programmingObjectLifetime,

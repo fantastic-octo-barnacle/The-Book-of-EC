@@ -2,6 +2,7 @@ import DefaultTheme, { VPLink } from "vitepress/theme"
 import { h } from "vue"
 import "./custom.css"
 import GitDiagram from "./components/GitDiagram.vue"
+import GitRemoteAnimation from "./components/GitRemoteAnimation.vue"
 import LearningGraph from "./components/LearningGraph.vue"
 import SidebarToggle from "./components/SidebarToggle.vue"
 
@@ -15,6 +16,7 @@ export default {
   /** 注册可在 Markdown 中直接使用的主题组件。 */
   enhanceApp({ app }: { app: { component: (name: string, component: unknown) => void } }) {
     app.component("GitDiagram", GitDiagram)
+    app.component("GitRemoteAnimation", GitRemoteAnimation)
     app.component("LearningGraph", LearningGraph)
     app.component("VPLink", VPLink)
   }
