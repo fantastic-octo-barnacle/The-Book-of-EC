@@ -6,9 +6,6 @@ import type { Core, ElementDefinition } from "cytoscape"
 import type { DagreLayoutOptions } from "cytoscape-dagre"
 import graph from "virtual:learning-graph"
 
-/** 虚拟模块提供的单个节点。 */
-type GraphNode = (typeof graph.nodes)[number]
-
 const props = defineProps<{
   /** 仅展示指定专题；省略时展示全部节点。 */
   topic?: string
