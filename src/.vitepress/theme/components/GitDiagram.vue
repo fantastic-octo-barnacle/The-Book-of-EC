@@ -203,11 +203,11 @@ const props = defineProps<{
   box-shadow: var(--vp-shadow-1);
 }
 
-.use-card>strong {
+.use-card > strong {
   font-size: 1.05rem;
 }
 
-.use-card>p {
+.use-card > p {
   margin: 0;
   color: var(--vp-c-text-2);
   font-size: 0.9rem;
@@ -274,7 +274,7 @@ const props = defineProps<{
   gap: 0.55rem;
 }
 
-.checkout-history>span {
+.checkout-history > span {
   padding: 0.35rem 0.7rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 999px;
@@ -383,7 +383,7 @@ const props = defineProps<{
 }
 
 .box-kicker,
-.version-column>span {
+.version-column > span {
   color: var(--vp-c-text-2);
   font-size: 0.78rem;
 }
