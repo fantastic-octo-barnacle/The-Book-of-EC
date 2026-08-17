@@ -12,4 +12,5 @@ node_modules/
 src/.vitepress/dist
 src/.vitepress/cache
 src/.vitepress/.temp
-.vitepress-dev.log
+.vitepress-dev*.log
+.vitepress-*-check.png

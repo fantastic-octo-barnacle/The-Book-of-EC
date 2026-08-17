@@ -194,7 +194,7 @@
   color: var(--vp-c-danger-1);
 }
 
-.circuit-diagram {
+.generated-diagram-canvas {
   margin: 1.5rem 0;
   padding: 1rem;
   overflow-x: auto;
@@ -203,22 +203,16 @@
   background: var(--vp-c-bg-soft);
 }
 
-.circuit-diagram-canvas {
-  min-width: max-content;
-}
-
-.circuit-diagram-canvas svg {
+.generated-diagram-canvas > svg {
+  display: block;
+  width: auto;
   max-width: 100%;
   height: auto;
+  min-width: 420px;
 }
 
-.circuit-diagram-error {
-  margin: 0;
-  background: transparent;
-}
-
-.circuit-diagram-error code {
-  color: var(--vp-c-danger-1);
+.generated-diagram-canvas {
+  min-width: max-content;
 }
 
 .learning-graph {
