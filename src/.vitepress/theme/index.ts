@@ -3,6 +3,7 @@ import { h } from "vue"
 import "./custom.css"
 import GitDiagram from "./components/GitDiagram.vue"
 import LearningGraph from "./components/LearningGraph.vue"
+import MermaidDiagram from "./components/MermaidDiagram.vue"
 import SidebarToggle from "./components/SidebarToggle.vue"
 
 export default {
@@ -16,6 +17,7 @@ export default {
   enhanceApp({ app }: { app: { component: (name: string, component: unknown) => void } }) {
     app.component("GitDiagram", GitDiagram)
     app.component("LearningGraph", LearningGraph)
+    app.component("MermaidDiagram", MermaidDiagram)
     app.component("VPLink", VPLink)
   }
 }

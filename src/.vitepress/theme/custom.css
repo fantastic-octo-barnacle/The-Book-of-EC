@@ -164,6 +164,36 @@
   font-size: 0.9rem;
 }
 
+.mermaid-diagram {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.mermaid-diagram-svg {
+  display: grid;
+  min-width: max-content;
+  justify-content: center;
+}
+
+.mermaid-diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.mermaid-diagram-error,
+.mermaid-diagram-loading {
+  margin: 0;
+  background: transparent;
+}
+
+.mermaid-diagram-error code {
+  color: var(--vp-c-danger-1);
+}
+
 .learning-graph {
   width: 100%;
   margin: 1.5rem 0;
