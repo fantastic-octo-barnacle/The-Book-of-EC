@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@skillpet/circuit':
+        specifier: ^0.6.5
+        version: 0.6.5(vue@3.5.41(typescript@5.9.3))
       cytoscape:
         specifier: ^3.34.0
         version: 3.34.0
@@ -475,6 +478,21 @@ packages:
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
+  '@skillpet/circuit@0.6.5':
+    resolution: {integrity: sha512-8uRLHd/OoqW1Dw/wYhiHMDOkrmZvBq+xZNroimzgqApodcEzk7oxlef1pMBhFYoTKiFWeryAghDbYQq4oOd8cA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      react: '>=17'
+      react-dom: '>=17'
+      vue: '>=3'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      vue:
+        optional: true
 
   '@types/cytoscape-dagre@2.3.4':
     resolution: {integrity: sha512-uOGXuPfPLFoKZaegjHl9oj4tqONNJuhUl180FiJgRZ35rVijBs6J4UP1Ah6mA6S46h+7pv4ICqpgfdC3EADZlw==}
@@ -1710,6 +1728,12 @@ snapshots:
       '@types/hast': 3.0.5
 
   '@shikijs/vscode-textmate@10.0.2': {}
+
+  '@skillpet/circuit@0.6.5(vue@3.5.41(typescript@5.9.3))':
+    dependencies:
+      katex: 0.16.47
+    optionalDependencies:
+      vue: 3.5.41(typescript@5.9.3)
 
   '@types/cytoscape-dagre@2.3.4':
     dependencies:

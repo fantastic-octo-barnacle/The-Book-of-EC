@@ -16,6 +16,7 @@
     "preview": "vitepress preview src"
   },
   "dependencies": {
+    "@skillpet/circuit": "^0.6.5",
     "cytoscape": "^3.34.0",
     "cytoscape-dagre": "^4.0.0"
   },

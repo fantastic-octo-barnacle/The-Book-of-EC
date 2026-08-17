@@ -1,6 +1,7 @@
 import DefaultTheme, { VPLink } from "vitepress/theme"
 import { h } from "vue"
 import "./custom.css"
+import CircuitDiagram from "./components/CircuitDiagram.vue"
 import GitDiagram from "./components/GitDiagram.vue"
 import LearningGraph from "./components/LearningGraph.vue"
 import MermaidDiagram from "./components/MermaidDiagram.vue"
@@ -18,6 +19,7 @@ export default {
     app.component("GitDiagram", GitDiagram)
     app.component("LearningGraph", LearningGraph)
     app.component("MermaidDiagram", MermaidDiagram)
+    app.component("CircuitDiagram", CircuitDiagram)
     app.component("VPLink", VPLink)
   }
 }

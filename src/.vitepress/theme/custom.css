@@ -194,6 +194,33 @@
   color: var(--vp-c-danger-1);
 }
 
+.circuit-diagram {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.circuit-diagram-canvas {
+  min-width: max-content;
+}
+
+.circuit-diagram-canvas svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.circuit-diagram-error {
+  margin: 0;
+  background: transparent;
+}
+
+.circuit-diagram-error code {
+  color: var(--vp-c-danger-1);
+}
+
 .learning-graph {
   width: 100%;
   margin: 1.5rem 0;
