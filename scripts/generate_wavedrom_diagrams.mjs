@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url"
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const outputDir = resolve(root, "src/.vitepress/theme/assets/diagrams")
 const require = createRequire(import.meta.url)
+const wavedromRequire = createRequire(require.resolve("wavedrom/package.json"))
+const json5 = wavedromRequire("json5")
 const wavedrom = require("wavedrom")
 
 const diagrams = [
@@ -20,7 +22,7 @@ mkdirSync(outputDir, { recursive: true })
 for (const diagram of diagrams) {
   const sourcePath = resolve(root, diagram.source)
   const outputPath = resolve(outputDir, diagram.output)
-  const source = JSON.parse(readFileSync(sourcePath, "utf8"))
+  const source = json5.parse(readFileSync(sourcePath, "utf8"))
   const svg = wavedrom.onml.stringify(wavedrom.renderAny(0, source, wavedrom.waveSkin))
   writeFileSync(outputPath, svg, "utf8")
 }
