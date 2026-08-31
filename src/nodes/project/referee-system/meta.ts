@@ -16,6 +16,6 @@ export default {
     "asynchronous-programming"
   ],
   technologies: ["Rust", "Cargo", "Embassy", "probe-rs", "STM32", "MCU", "RoboMaster", "UART"],
-  relations: [{ target: "project.desktop-text-statistics", type: "recommended" }],
+  relations: [{ target: "project.batch-url-probe", type: "recommended" }],
   parts: [{ title: "裁判系统通信", path: "index.md" }]
 } satisfies NodeDefinition

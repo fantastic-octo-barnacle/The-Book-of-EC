@@ -19,8 +19,8 @@ import programmingCppResource from "#nodes/programming/cpp-resource/meta.ts"
 import programmingObjectLifetime from "#nodes/programming/object-lifetime/meta.ts"
 import programmingPointersArrays from "#nodes/programming/pointers-arrays/meta.ts"
 import programmingTranslationLinking from "#nodes/programming/translation-linking/meta.ts"
+import projectBatchUrlProbe from "#nodes/project/batch-url-probe/meta.ts"
 import projectCanMotorControl from "#nodes/project/can-motor-control/meta.ts"
-import projectDesktopTextStatistics from "#nodes/project/desktop-text-statistics/meta.ts"
 import projectPlatformBringUp from "#nodes/project/platform-bring-up/meta.ts"
 import projectRefereeSystem from "#nodes/project/referee-system/meta.ts"
 import roboticsBringUp from "#nodes/robotics/bring-up/meta.ts"
@@ -50,7 +50,7 @@ export const nodeIds = [
   "control.feedback",
   "control.pid",
   "control.estimation-actuation",
-  "project.desktop-text-statistics",
+  "project.batch-url-probe",
   "project.platform-bring-up",
   "project.can-motor-control",
   "project.referee-system",
@@ -125,7 +125,7 @@ export const nodes = {
   [controlFeedback.id]: controlFeedback,
   [controlPid.id]: controlPid,
   [controlEstimationActuation.id]: controlEstimationActuation,
-  [projectDesktopTextStatistics.id]: projectDesktopTextStatistics,
+  [projectBatchUrlProbe.id]: projectBatchUrlProbe,
   [projectPlatformBringUp.id]: projectPlatformBringUp,
   [projectCanMotorControl.id]: projectCanMotorControl,
   [projectRefereeSystem.id]: projectRefereeSystem,

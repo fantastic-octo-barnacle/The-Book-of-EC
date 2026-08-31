@@ -68,7 +68,7 @@ export const topics = defineTopics({
     title: "项目实践",
     summary: "通过项目和实验任务练习工程、编程、嵌入式、通信与控制能力。",
     members: [
-      "project.desktop-text-statistics",
+      "project.batch-url-probe",
       "project.platform-bring-up",
       "project.can-motor-control",
       "project.referee-system"

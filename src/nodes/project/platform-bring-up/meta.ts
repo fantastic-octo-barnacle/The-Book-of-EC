@@ -18,6 +18,6 @@ export default {
     "debugging"
   ],
   technologies: ["Rust", "Cargo", "Embassy", "probe-rs", "STM32", "Cortex-M", "MCU", "RoboMaster"],
-  relations: [{ target: "project.desktop-text-statistics", type: "recommended" }],
+  relations: [{ target: "project.batch-url-probe", type: "recommended" }],
   parts: [{ title: "STM32 平台与工程", path: "index.md" }]
 } satisfies NodeDefinition

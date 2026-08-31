@@ -27,6 +27,6 @@ export default {
     "CAN",
     "motor"
   ],
-  relations: [{ target: "project.desktop-text-statistics", type: "recommended" }],
+  relations: [{ target: "project.batch-url-probe", type: "recommended" }],
   parts: [{ title: "CAN 电机速度闭环", path: "index.md" }]
 } satisfies NodeDefinition
