@@ -36,6 +36,7 @@ export const topics = defineTopics({
     summary: "从板级约束到 MCU、外设与并发。",
     members: [
       "embedded.circuit-basics",
+      "embedded.mcu-structure",
       "embedded.clock-reset",
       "embedded.gpio",
       "embedded.interrupts",
