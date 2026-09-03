@@ -9,6 +9,7 @@ import embeddedClockReset from "#nodes/embedded/clock-reset/meta.ts"
 import embeddedDrivers from "#nodes/embedded/drivers/meta.ts"
 import embeddedGpio from "#nodes/embedded/gpio/meta.ts"
 import embeddedInterrupts from "#nodes/embedded/interrupts/meta.ts"
+import embeddedMcuStructure from "#nodes/embedded/mcu-structure/meta.ts"
 import embeddedRtos from "#nodes/embedded/rtos/meta.ts"
 import embeddedTimersDma from "#nodes/embedded/timers-dma/meta.ts"
 import engineeringDebugging from "#nodes/engineering/debugging/meta.ts"
@@ -34,6 +35,7 @@ export const nodeIds = [
   "programming.pointers-arrays",
   "programming.cpp-resource",
   "embedded.circuit-basics",
+  "embedded.mcu-structure",
   "embedded.clock-reset",
   "embedded.gpio",
   "embedded.interrupts",
@@ -105,6 +107,7 @@ export const nodes = {
   [programmingPointersArrays.id]: programmingPointersArrays,
   [programmingCppResource.id]: programmingCppResource,
   [embeddedCircuitBasics.id]: embeddedCircuitBasics,
+  [embeddedMcuStructure.id]: embeddedMcuStructure,
   [embeddedClockReset.id]: embeddedClockReset,
   [embeddedGpio.id]: embeddedGpio,
   [embeddedInterrupts.id]: embeddedInterrupts,

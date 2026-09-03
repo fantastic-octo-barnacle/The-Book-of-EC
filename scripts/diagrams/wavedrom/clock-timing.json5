@@ -1,0 +1,9 @@
+{
+  signal: [
+    { name: "CLK", wave: "p.", period: 4 },
+    { name: "D", wave: "34......", data: ["old", "new"] },
+    { name: "Q", wave: "3.4.....", data: ["old", "new"] }
+  ],
+  edge: ["D@1~>Q@2 setup + propagation"],
+  config: { hscale: 1.4 }
+}
