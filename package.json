@@ -6,6 +6,7 @@
   },
   "scripts": {
     "dev": "vitepress dev src",
+    "diagrams:generate": "node scripts/generate_wavedrom_diagrams.mjs",
     "fmt": "oxfmt .",
     "fmt:check": "oxfmt --check .",
     "lint": "oxlint src --deny-warnings",

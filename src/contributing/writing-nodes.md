@@ -43,6 +43,8 @@ Markdown 显式导入教学组件。节点内组件使用相对路径，静态�
 
 `.vitepress/theme/` 只保存站点布局、全站导航、通用渲染能力等站点级组件和样式。表达某个学习内容的组件即使被多个页面使用，也不属于主题。图表等生成资源的源文件和产物放在所属节点的 `assets/`，通用生成工具放在 `scripts/`。
 
+修改 `*.wavedrom.json5` 图表源文件后，运行 `pnpm diagrams:generate` 重新生成 SVG，并检查源文件和 SVG 的差异是否符合预期。
+
 ## 站内链接
 
 正文中的普通站内链接使用 Markdown 链接语法。自定义 HTML 布局需要包裹复杂内容时，使用全局注册的 `<VPLink href="/path">`，不要直接写根路径 `<a href="/path">`；`VPLink` 会根据部署配置补充 `base` 和页面扩展名。
