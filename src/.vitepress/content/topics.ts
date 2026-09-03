@@ -19,7 +19,12 @@ export const topics = defineTopics({
   engineering: {
     title: "工程与协作",
     summary: "命令行、版本管理和调试的工程基础。",
-    members: ["engineering.shell-basics", "engineering.git-basics", "engineering.debugging"]
+    members: [
+      "engineering.shell-basics",
+      "engineering.git-basics",
+      "engineering.git-remote",
+      "engineering.debugging"
+    ]
   },
   programming: {
     title: "C/C++ 与程序运行",

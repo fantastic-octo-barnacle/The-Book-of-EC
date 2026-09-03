@@ -8,8 +8,8 @@
     "dev": "vitepress dev src",
     "fmt": "oxfmt .",
     "fmt:check": "oxfmt --check .",
-    "lint": "oxlint src/.vitepress --deny-warnings",
-    "lint:fix": "oxlint src/.vitepress --fix",
+    "lint": "oxlint src --deny-warnings",
+    "lint:fix": "oxlint src --fix",
     "typecheck": "vue-tsc --noEmit",
     "check": "pnpm run fmt:check && pnpm run lint && pnpm run typecheck",
     "build": "vitepress build src",
@@ -18,7 +18,8 @@
   "dependencies": {
     "cytoscape": "^3.34.0",
     "cytoscape-dagre": "^4.0.0",
-    "wavedrom": "^3.6.2"
+    "wavedrom": "^3.6.2",
+    "motion-v": "^2.3.0"
   },
   "devDependencies": {
     "@types/cytoscape-dagre": "^2.3.4",

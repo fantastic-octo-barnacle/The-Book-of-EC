@@ -14,6 +14,7 @@ export default {
     { title: "首次 Git 配置", path: "setup.md" },
     { title: "创建仓库", path: "repositories.md" },
     { title: "创建 commit", path: "commits.md" },
-    { title: "分支", path: "branches.md" }
+    { title: "分支", path: "branches.md" },
+    { title: "使用 .gitignore 文件", path: "gitignore.md" }
   ]
 } satisfies NodeDefinition

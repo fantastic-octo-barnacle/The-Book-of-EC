@@ -67,6 +67,7 @@ export const technologies = [
   "Cortex-M",
   "FreeRTOS",
   "Git",
+  "GitHub",
   "I2C",
   "IMU",
   "Linux",

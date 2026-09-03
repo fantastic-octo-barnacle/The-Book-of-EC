@@ -12,3 +12,4 @@ Git 是版本管理工具。它把项目的不同状态组织成可以查看、�
 2. [创建仓库](./repositories)：用 `git init` 创建仓库，或用 `git clone` 获取已有仓库。
 3. [创建 commit](./commits)：理解工作区、暂存区和本地仓库，完整保存一次修改。
 4. [分支](./branches)：认识并行工作线与合并，并自行选择一套常用命令。
+5. [.gitignore](./gitignore.md)：使用 `.gitignore` 排除特定文件。

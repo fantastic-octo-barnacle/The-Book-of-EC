@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type DiagramKind = "uses" | "areas" | "snapshots" | "branches"
+type DiagramKind = "uses" | "areas" | "snapshots" | "branches" | "remotes" | "fork-flow"
 
 const props = defineProps<{
   /** 要展示的 Git 概念图。 */
@@ -120,7 +120,7 @@ const props = defineProps<{
       </div>
     </div>
 
-    <div v-else class="branch-graph" aria-hidden="true">
+    <div v-else-if="props.kind === 'branches'" class="branch-graph" aria-hidden="true">
       <svg viewBox="0 0 680 230" role="presentation">
         <path class="graph-line experiment-line" d="M70 145 H270 L390 70 H510" />
         <path class="graph-line main-line" d="M270 145 H510" />
@@ -149,6 +149,74 @@ const props = defineProps<{
       </svg>
     </div>
 
+    <div v-else-if="props.kind === 'remotes'" class="remote-graph" aria-hidden="true">
+      <svg viewBox="0 0 760 280" role="presentation">
+        <path class="sync-line push-line" d="M245 107 C350 107 430 148 523 148" />
+        <path class="sync-line fetch-line" d="M540 165 C430 165 350 204 262 204" />
+
+        <rect class="repository-frame local-frame" x="20" y="20" width="330" height="235" rx="16" />
+        <text class="repository-title" x="40" y="52">本地仓库</text>
+        <rect class="ref-card local-ref" x="55" y="78" width="190" height="58" rx="10" />
+        <text x="78" y="113">本地分支 main</text>
+        <rect class="ref-card tracking-ref" x="55" y="175" width="190" height="58" rx="10" />
+        <text x="73" y="210">远程跟踪 origin/main</text>
+
+        <rect
+          class="repository-frame github-frame"
+          x="510"
+          y="58"
+          width="225"
+          height="160"
+          rx="16"
+        />
+        <text class="repository-title" x="535" y="91">GitHub 远程仓库</text>
+        <rect class="ref-card remote-ref" x="540" y="119" width="165" height="58" rx="10" />
+        <text x="568" y="154">远程分支 main</text>
+
+        <polygon class="push-head" points="540,148 523,139 523,157" />
+        <polygon class="fetch-head" points="245,204 262,195 262,213" />
+        <text class="action-label" x="382" y="104">push</text>
+        <text class="action-label" x="380" y="219">fetch</text>
+      </svg>
+    </div>
+
+    <div v-else class="fork-graph" aria-hidden="true">
+      <svg viewBox="0 0 820 300" role="presentation">
+        <path class="sync-line push-line" d="M215 150 H298" />
+        <path class="sync-line pr-line" d="M510 150 H593" />
+        <path class="sync-line fetch-line" d="M705 215 V260 H117 V232" />
+
+        <rect class="repository-frame local-frame" x="20" y="85" width="195" height="130" rx="16" />
+        <text class="repository-title" x="49" y="119">本地仓库</text>
+        <rect class="ref-card local-ref" x="47" y="143" width="140" height="48" rx="10" />
+        <text x="72" y="173">功能分支</text>
+
+        <rect class="repository-frame fork-frame" x="315" y="85" width="195" height="130" rx="16" />
+        <text class="repository-title" x="341" y="119">自己的 Fork</text>
+        <rect class="ref-card fork-ref" x="342" y="143" width="140" height="48" rx="10" />
+        <text x="380" y="173">功能分支</text>
+
+        <rect
+          class="repository-frame upstream-frame"
+          x="610"
+          y="85"
+          width="190"
+          height="130"
+          rx="16"
+        />
+        <text class="repository-title" x="636" y="119">原 GitHub 仓库</text>
+        <rect class="ref-card remote-ref" x="637" y="143" width="136" height="48" rx="10" />
+        <text x="688" y="173">main</text>
+
+        <polygon class="push-head" points="315,150 298,141 298,159" />
+        <polygon class="pr-head" points="610,150 593,141 593,159" />
+        <polygon class="fetch-head" points="117,215 108,232 126,232" />
+        <text class="action-label" x="219" y="137">push origin</text>
+        <text class="action-label" x="522" y="137">PR</text>
+        <text class="action-label" x="370" y="281">fetch upstream</text>
+      </svg>
+    </div>
+
     <figcaption v-if="props.kind === 'areas'">
       工作区中的修改先由 <code>git add</code> 选入暂存区，再由
       <code>git commit</code> 保存到本地仓库。
@@ -158,6 +226,14 @@ const props = defineProps<{
     </figcaption>
     <figcaption v-else-if="props.kind === 'branches'">
       两条工作线可以从同一个版本继续产生不同的 commit，之后再按需要合并。
+    </figcaption>
+    <figcaption v-else-if="props.kind === 'remotes'">
+      <code>push</code> 更新 GitHub 上的分支；<code>fetch</code>
+      更新本地保存的远程跟踪分支，不会直接改变本地分支。
+    </figcaption>
+    <figcaption v-else>
+      功能分支先推送到自己的 Fork，再通过 Pull Request 提议进入原仓库；原仓库的更新通过
+      <code>upstream</code> 获取。
     </figcaption>
   </figure>
 </template>
@@ -506,6 +582,109 @@ const props = defineProps<{
   stroke: var(--vp-c-indigo-1);
 }
 
+.remote-graph,
+.fork-graph {
+  width: 100%;
+  min-width: 0;
+}
+
+.remote-graph svg,
+.fork-graph svg {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+}
+
+.repository-frame,
+.ref-card {
+  fill: var(--vp-c-bg);
+  stroke-width: 2;
+}
+
+.repository-frame {
+  stroke: var(--vp-c-divider);
+}
+
+.local-frame {
+  stroke: var(--vp-c-brand-1);
+}
+
+.github-frame,
+.upstream-frame {
+  stroke: var(--vp-c-indigo-1);
+}
+
+.fork-frame {
+  stroke: var(--vp-c-yellow-1);
+}
+
+.ref-card {
+  stroke: var(--vp-c-text-3);
+}
+
+.local-ref {
+  fill: var(--vp-c-brand-soft);
+  stroke: var(--vp-c-brand-1);
+}
+
+.tracking-ref,
+.fork-ref {
+  fill: var(--vp-c-bg-soft);
+  stroke: var(--vp-c-yellow-1);
+}
+
+.remote-ref {
+  fill: var(--vp-c-bg-soft);
+  stroke: var(--vp-c-indigo-1);
+}
+
+.remote-graph text,
+.fork-graph text {
+  fill: var(--vp-c-text-1);
+  font: 600 14px var(--vp-font-family-base);
+}
+
+.remote-graph .repository-title,
+.fork-graph .repository-title {
+  font-size: 17px;
+}
+
+.sync-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.push-line {
+  stroke: var(--vp-c-brand-1);
+}
+
+.fetch-line {
+  stroke: var(--vp-c-indigo-1);
+}
+
+.pr-line {
+  stroke: var(--vp-c-yellow-1);
+}
+
+.push-head {
+  fill: var(--vp-c-brand-1);
+}
+
+.fetch-head {
+  fill: var(--vp-c-indigo-1);
+}
+
+.pr-head {
+  fill: var(--vp-c-yellow-1);
+}
+
+.remote-graph .action-label,
+.fork-graph .action-label {
+  fill: var(--vp-c-text-2);
+  font-size: 13px;
+}
+
 @media (max-width: 640px) {
   .git-diagram {
     margin-right: -1rem;
@@ -551,6 +730,11 @@ const props = defineProps<{
 
   .branch-graph {
     min-width: 540px;
+  }
+
+  .remote-graph,
+  .fork-graph {
+    min-width: 620px;
   }
 }
 </style>
