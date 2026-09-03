@@ -7,7 +7,7 @@ next: false
 
 # 学习图
 
-学习图是全书的正文目录。每个节点对应一个可以独立学习和验证的知识单元；实线表示必需先修，虚线表示建议先修。
+学习图是全书的正文目录。每个节点对应一个可以独立学习或完成并验证的单元；实线表示必需先修，虚线表示建议先修。
 
 选择节点可查看摘要、直接先修、直接后续和正文入口。搜索和筛选只改变当前视图，不改变节点之间的关系。
 
@@ -24,4 +24,5 @@ next: false
   <VPLink href="/map/topics/communication"><strong>通信</strong><span>串行总线、帧与协议。</span></VPLink>
   <VPLink href="/map/topics/control"><strong>控制与机器人</strong><span>采样、反馈、PID 与估计。</span></VPLink>
   <VPLink href="/map/topics/robotics"><strong>RoboMaster 实践</strong><span>板级启动与系统联调。</span></VPLink>
+  <VPLink href="/map/topics/project-practice"><strong>项目实践</strong><span>工程、编程与嵌入式综合任务。</span></VPLink>
 </div>

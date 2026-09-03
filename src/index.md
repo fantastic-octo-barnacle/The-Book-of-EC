@@ -15,7 +15,7 @@ hero:
 
 features:
   - title: 节点是正文
-    details: 每个节点解决一个明确的学习目标，可包含多个连续小节。
+    details: 每个节点解决一个明确的学习或实践目标，可包含多个连续小节。
   - title: 关系决定路径
     details: 必需与建议先修构成学习图，不强加覆盖全书的线性顺序。
   - title: 观测验证理解
@@ -47,6 +47,7 @@ features:
   <VPLink href="/map/topics/communication"><strong>通信</strong><span>串行总线、帧与协议。</span></VPLink>
   <VPLink href="/map/topics/control"><strong>控制与机器人</strong><span>采样、反馈、PID 与估计。</span></VPLink>
   <VPLink href="/map/topics/robotics"><strong>RoboMaster 实践</strong><span>板级启动与系统联调。</span></VPLink>
+  <VPLink href="/map/topics/project-practice"><strong>项目实践</strong><span>工程、编程与嵌入式综合任务。</span></VPLink>
 </div>
 
 ## 从问题进入
@@ -54,5 +55,5 @@ features:
 遇到构建、上电、通信或控制问题时，先记录现象和观测，再从[问题排查](/problems/)定位相关节点。
 
 ::: info 本书的边界
-本站负责学习顺序、概念边界、检索词和验证方法，不替代教材、芯片手册或项目文档。
+本站负责学习关系、概念边界、训练任务和验证方法，不替代教材、芯片手册或实际工程文档。
 :::

@@ -20,6 +20,10 @@ import programmingCppResource from "#nodes/programming/cpp-resource/meta.ts"
 import programmingObjectLifetime from "#nodes/programming/object-lifetime/meta.ts"
 import programmingPointersArrays from "#nodes/programming/pointers-arrays/meta.ts"
 import programmingTranslationLinking from "#nodes/programming/translation-linking/meta.ts"
+import projectBatchUrlProbe from "#nodes/project/batch-url-probe/meta.ts"
+import projectCanMotorControl from "#nodes/project/can-motor-control/meta.ts"
+import projectPlatformBringUp from "#nodes/project/platform-bring-up/meta.ts"
+import projectRefereeSystem from "#nodes/project/referee-system/meta.ts"
 import roboticsBringUp from "#nodes/robotics/bring-up/meta.ts"
 import roboticsSystemIntegration from "#nodes/robotics/system-integration/meta.ts"
 import type { Concept, Level, Technology } from "./taxonomy.ts"
@@ -48,6 +52,10 @@ export const nodeIds = [
   "control.feedback",
   "control.pid",
   "control.estimation-actuation",
+  "project.batch-url-probe",
+  "project.platform-bring-up",
+  "project.can-motor-control",
+  "project.referee-system",
   "robotics.bring-up",
   "robotics.system-integration"
 ] as const
@@ -120,6 +128,10 @@ export const nodes = {
   [controlFeedback.id]: controlFeedback,
   [controlPid.id]: controlPid,
   [controlEstimationActuation.id]: controlEstimationActuation,
+  [projectBatchUrlProbe.id]: projectBatchUrlProbe,
+  [projectPlatformBringUp.id]: projectPlatformBringUp,
+  [projectCanMotorControl.id]: projectCanMotorControl,
+  [projectRefereeSystem.id]: projectRefereeSystem,
   [roboticsBringUp.id]: roboticsBringUp,
   [roboticsSystemIntegration.id]: roboticsSystemIntegration
 } satisfies Record<NodeId, NodeDefinition>
