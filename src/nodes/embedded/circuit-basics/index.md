@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ClockTimingDiagram from "../../../.vitepress/theme/components/ClockTimingDiagram.vue"
-import DigitalLogicDiagram from "../../../.vitepress/theme/components/DigitalLogicDiagram.vue"
+import ClockTimingDiagram from "./components/ClockTimingDiagram.vue"
+import DigitalLogicDiagram from "./components/DigitalLogicDiagram.vue"
 </script>
 
 # 电路与电平基础

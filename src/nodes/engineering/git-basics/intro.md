@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import GitDiagram from "#nodes/engineering/_shared/components/GitDiagram.vue"
+</script>
+
 # Git 基础
 
 Git 是版本管理工具。它把项目的不同状态组织成可以查看、切换和并行发展的版本历史。

@@ -14,11 +14,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": [
-    "src/.vitepress/**/*.ts",
-    "src/.vitepress/**/*.tsx",
-    "src/.vitepress/**/*.vue",
-    "src/.vitepress/**/*.d.ts"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"],
   "exclude": ["src/.vitepress/cache", "src/.vitepress/dist"]
 }

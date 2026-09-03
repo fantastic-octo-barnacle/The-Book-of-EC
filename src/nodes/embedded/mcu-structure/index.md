@@ -81,7 +81,7 @@ MCU 光有计算功能可不行，我们想要的并不是一个计算器，而�
 
 > 架构框图一般在芯片数据手册中
 
-![STM32F103-Block-Diagram](../../../.vitepress/theme/assets/pictures/F103-Block-Diagram.png)
+![STM32F103-Block-Diagram](./assets/stm32f103-block-diagram.png)
 
 ### 寄存器映射
 
@@ -95,7 +95,7 @@ MCU 光有计算功能可不行，我们想要的并不是一个计算器，而�
 
 > 外设功能和寄存器说明可在芯片的参考手册（Reference manual）中找到
 
-![STM32F103-UART-Register](../../../.vitepress/theme/assets/pictures/F103-Register.png)
+![STM32F103-UART-Register](./assets/stm32f103-uart-register.png)
 
 其中包含了：
 

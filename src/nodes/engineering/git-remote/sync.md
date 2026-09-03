@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import GitRemoteAnimation from "./components/GitRemoteAnimation.vue"
+</script>
+
 # 同步仓库
 
 远程同步传递的是 commit 和分支引用，不是直接复制当前工作区。同步前先提交或妥善保存本地修改，并用 `git status` 确认状态。

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import GitDiagram from "#nodes/engineering/_shared/components/GitDiagram.vue"
+</script>
+
 # Git 远程仓库与 GitHub 协作
 
 Git remote 是本地仓库中保存的一组远程仓库名称和 URL。它让 Git 知道从哪里获取 commit、向哪里发送 commit，但不会自动同步任何内容。

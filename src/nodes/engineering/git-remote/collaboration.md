@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import GitDiagram from "#nodes/engineering/_shared/components/GitDiagram.vue"
+</script>
+
 # Fork 与 Pull Request
 
 Pull Request（PR）是 GitHub 上用于提出、讨论和审查分支差异的协作记录。修改分支可以位于目标仓库中，也可以位于 Fork 中。

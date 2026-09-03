@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import clockTimingSvg from "../assets/diagrams/clock-timing.svg?raw"
+import clockTimingSvg from "../assets/clock-timing.svg?raw"
 </script>
 
 <template>
@@ -37,6 +37,24 @@ import clockTimingSvg from "../assets/diagrams/clock-timing.svg?raw"
   color: var(--vp-c-text-2);
   font-size: 0.92rem;
   line-height: 1.6;
+}
+
+.generated-diagram-canvas {
+  min-width: max-content;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.generated-diagram-canvas :deep(svg) {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  min-width: 420px;
 }
 
 .clock-timing-diagram-canvas :deep(svg) {

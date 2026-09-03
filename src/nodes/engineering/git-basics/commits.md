@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import GitDiagram from "#nodes/engineering/_shared/components/GitDiagram.vue"
+</script>
+
 # 创建 commit
 
 一个 commit 是一次有明确目的的版本记录。创建 commit 时，Git 只保存你已经选入暂存区的内容，不会自动保存工作区中的全部修改。

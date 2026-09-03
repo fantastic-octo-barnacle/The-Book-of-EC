@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import GitDiagram from "#nodes/engineering/_shared/components/GitDiagram.vue"
+</script>
+
 # 分支
 
 分支用于在同一个仓库中保留不同的工作方向。你可以让 `main` 保持在已经验证的状态，同时在另一个分支尝试新功能；这些修改不会因为存在于同一个仓库就立即进入 `main`。

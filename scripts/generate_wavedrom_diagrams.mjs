@@ -4,7 +4,7 @@ import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-const outputDir = resolve(root, "src/.vitepress/theme/assets/diagrams")
+const outputDir = resolve(root, "src/nodes/embedded/circuit-basics/assets")
 const require = createRequire(import.meta.url)
 const wavedromRequire = createRequire(require.resolve("wavedrom/package.json"))
 const json5 = wavedromRequire("json5")
@@ -12,7 +12,7 @@ const wavedrom = require("wavedrom")
 
 const diagrams = [
   {
-    source: "scripts/diagrams/wavedrom/clock-timing.json5",
+    source: "src/nodes/embedded/circuit-basics/assets/clock-timing.wavedrom.json5",
     output: "clock-timing.svg"
   }
 ]
