@@ -19,8 +19,7 @@
   "dependencies": {
     "cytoscape": "^3.34.0",
     "cytoscape-dagre": "^4.0.0",
-    "motion-v": "^2.3.0",
-    "wavedrom": "^3.6.2"
+    "motion-v": "^2.3.0"
   },
   "devDependencies": {
     "@types/cytoscape-dagre": "^2.3.4",
@@ -33,7 +32,8 @@
     "vite": "8.2.1",
     "vitepress": "2.0.0-alpha.19",
     "vue": "3.5.41",
-    "vue-tsc": "^3.3.9"
+    "vue-tsc": "^3.3.9",
+    "wavedrom": "^3.6.2"
   },
   "engines": {
     "node": ">=24 <25"
