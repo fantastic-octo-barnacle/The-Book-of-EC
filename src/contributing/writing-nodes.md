@@ -23,6 +23,26 @@ next: false
 
 当一部分内容需要独立阅读、具有明确标题，或需要单独练习和验证时，可以拆成附属页。附属页仍属于同一个学习节点，不会成为学习图顶点。
 
+## 节点资源
+
+节点私有的 Vue 组件和静态资源与正文放在同一节点目录，并分别进入 `components/` 和 `assets/`：
+
+```text
+src/nodes/<domain>/<slug>/
+├── index.md
+├── meta.ts
+├── components/
+│   └── ExampleDiagram.vue
+└── assets/
+    └── example-diagram.svg
+```
+
+Markdown 显式导入教学组件。节点内组件使用相对路径，静态资源也使用相对于当前页面或组件的路径。资源文件名使用小写 kebab-case。
+
+资源只有在出现第二个节点的实际使用者时才提升为共享资源。同一领域内共享资源放在 `src/nodes/<domain>/_shared/`；跨领域共享资源放在 `src/nodes/_shared/`。共享目录内部仍按 `components/` 和 `assets/` 分类。不要因为预计以后可能复用，就提前把资源放入共享目录。
+
+`.vitepress/theme/` 只保存站点布局、全站导航、通用渲染能力等站点级组件和样式。表达某个学习内容的组件即使被多个页面使用，也不属于主题。图表等生成资源的源文件和产物放在所属节点的 `assets/`，通用生成工具放在 `scripts/`。
+
 ## 站内链接
 
 正文中的普通站内链接使用 Markdown 链接语法。自定义 HTML 布局需要包裹复杂内容时，使用全局注册的 `<VPLink href="/path">`，不要直接写根路径 `<a href="/path">`；`VPLink` 会根据部署配置补充 `base` 和页面扩展名。
